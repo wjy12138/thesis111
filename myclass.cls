@@ -298,14 +298,19 @@
 \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
 
 % 设置章节标题格式
-\titleformat{\section}
-  {\centering\heiti\zihao{3}}{\thesection}{0em}{}
+
+\newcommand{\sectionbreak}{\clearpage}
+\titleformat{\section}%一级标题另起一页
+  {\vspace*{-5.2pt}\centering\heiti\fontspec{SimHei}\zihao{3}}{\thesection}{0.6em}{}  %编号和标题之间的距离为0.5em，顶部距离，强制英文黑体
+% % --- 2. 【新增】修改一级标题间距 ---
+% % \titlespacing{命令}{左缩进}{段前间距}{段后间距}
+% \titlespacing{\section}{0.0001pt}{*36pt}{18pt}
 
 \titleformat{\subsection}
-  {\heiti\zihao{-3}}{\thesubsection}{0em}{}
+  {\heiti\zihao{-3}\fontspec{SimHei}}{\thesubsection}{0.6em}{}
 
 \titleformat{\subsubsection}
-  {\songti\zihao{-3}}{\thesubsubsection}{0em}{}
+  {\heiti\zihao{-3}\fontspec{SimHei}}{\thesubsubsection}{0.6em}{}
 
 % 定义目录的页眉样式
 \fancypagestyle{tablecontents}{
