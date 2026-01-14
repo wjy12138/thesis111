@@ -1,6 +1,4 @@
 % myclass.cls
-% 版本：v1.0
-% 描述：基础页面布局配置
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{myclass}[2024/01/01 v1.0 My Custom LaTeX Class]
@@ -310,16 +308,20 @@
 
 \newcommand{\sectionbreak}{\clearpage}
 \titleformat{\section}%一级标题另起一页
-  {\vspace*{-5.2pt}\centering\heiti\fontspec{SimHei}\zihao{3}}{\thesection}{0.6em}{}  %编号和标题之间的距离为0.5em，顶部距离，强制英文黑体
-% % --- 2. 【新增】修改一级标题间距 ---
-% % \titlespacing{命令}{左缩进}{段前间距}{段后间距}
-% \titlespacing{\section}{0.0001pt}{*36pt}{18pt}
+  {\vspace*{-5.2pt}\centering\heiti  \zihao{3}}{\thesection}{0.6em}{}  %编号和标题之间的距离为0.5em，顶部距离，强制英文黑体
 
 \titleformat{\subsection}
-  {\heiti\zihao{-3}\fontspec{SimHei}}{\thesubsection}{0.6em}{}
+  {\heiti\zihao{-3} }{\thesubsection}{0.6em}{}
 
 \titleformat{\subsubsection}
-  {\heiti\zihao{-3}\fontspec{SimHei}}{\thesubsubsection}{0.6em}{}
+  {\heiti\zihao{-3} }{\thesubsubsection}{0.6em}{}
+
+% --- 设置二级标题 (subsection) 的间距 ---
+% \titlespacing{命令}{左缩进}{段前间距}{段后间距}
+\titlespacing{\subsection}{0pt}{0pt}{0pt}
+
+% --- 设置三级标题 (subsubsection) 的间距 ---
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
 
 % 定义目录的页眉样式
 \fancypagestyle{tablecontents}{
