@@ -7,6 +7,8 @@
 \LoadClass[a4paper, zihao=-4]{ctexart}
 \setlength{\parindent}{2em} % 设置全局段落缩进为2em
 % 2. 加载页面布局宏包
+\RequirePackage{amsmath}  % 数学公式支持
+\RequirePackage{amssymb}  % 数学符号支持
 \RequirePackage{geometry}  % 页面布局
 \RequirePackage{graphicx}  % 图片支持
 \RequirePackage{setspace}  % 行距控制
@@ -400,3 +402,22 @@
     urlcolor=blue,         % 网页链接为蓝色
     bookmarksnumbered=true % 书签带章节编号
 }
+
+
+%% --- 设置公式与正文的间距 ---
+\AtBeginDocument{
+    % 1. 公式上方默认间距
+    \setlength{\abovedisplayskip}{2.5pt} 
+    
+    % 2. 公式下方默认间距
+    \setlength{\belowdisplayskip}{6pt}
+    
+    % 3. 公式上方“短行”间距 
+    % (当公式前一行的文字很短，没有碰到公式时，用这个较小的间距)
+    \setlength{\abovedisplayshortskip}{0pt}
+    
+    % 4. 公式下方“短行”间距
+    \setlength{\belowdisplayshortskip}{3pt}
+}
+% 让公式编号跟随章节 (效果：1.1, 1.2, 2.1)
+\numberwithin{equation}{section}
