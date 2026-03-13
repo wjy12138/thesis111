@@ -61,10 +61,10 @@
 \fancypagestyle{fancy}{
     \fancyhf{} % 清空当前设置
     \fancyhead[L]{\songti\zihao{-5} 重庆大学本科学生毕业论文（设计）}
-    
+
     % 关键修改：这里用 \leftmark 代替了具体的文字
-    \fancyhead[R]{\songti\zihao{-5} \leftmark} 
-    
+    \fancyhead[R]{\songti\zihao{-5} \leftmark}
+
     \renewcommand{\headrulewidth}{0.4pt}
     \renewcommand{\footrulewidth}{0pt}
     \fancyfoot[C]{\thepage}
@@ -73,7 +73,7 @@
 \renewcommand{\sectionmark}[1]{%
     % \markboth{左标记内容}{右标记内容}
     % \thesection 是序号(如 1), #1 是标题内容(如 绪论)
-    \markboth{\thesection\quad #1}{} 
+    \markboth{\thesection\quad #1}{}
 }
 
 % 7. 设置全局页面样式
@@ -82,29 +82,29 @@
 % 定义封面命令 \makecover
 \newcommand{\makecover}{
     \begin{titlepage}
-        \centering 
-        \singlespacing 
-        
+        \centering
+        \singlespacing
+
         % --- 1. 学校名称 ---
         \vspace*{0pt}
 
         { \heiti \zihao{-2} 重庆大学本科学生毕业论文（设计） \par}
-        
+
         % --- 空两行 (小二) ---
         {\zihao{-2} \setlength{\baselineskip}{35pt}  \vspace{2\baselineskip}}
-        
+
         % --- 2. 论文题目 ---
-        { \heiti \zihao{2} XXX计算方法的研究 \par}
-        
+        { \heiti \zihao{2} 风电功率深度学习预测方法研究 \par}
+
         % --- 空三行 (五号) ---
         { \zihao{5} \setlength{\baselineskip}{18pt} \vspace{3\baselineskip}}
-        
+
         % --- 3. 图片 ---
         \includegraphics[width=4.27cm, height=4.19cm]{figure/logo.png}
 
         % --- 空两行 (三号) ---
         { \zihao{3} \setlength{\baselineskip}{21.5pt} \vspace{2\baselineskip}}
-        
+
         % --- 4. 学生信息部分 (重点修改) ---
         % 设置左对齐容器，消除居中影响，以便进行精确缩进
         % 字体：黑体三号
@@ -112,24 +112,24 @@
         {
             \heiti \zihao{3} % 设定字体
             %设置行高。
-            \setlength{\baselineskip}{31pt} 
-            
-            \begin{flushleft} 
+            \setlength{\baselineskip}{31pt}
+
+            \begin{flushleft}
                 % 设置右缩进 0.03cm
                 \setlength{\rightskip}{0.03cm}
                 % 设置左缩进 3.49cm
-                \setlength{\leftskip}{3.49cm} 
-                
+                \setlength{\leftskip}{3.49cm}
+
                 % 【关键修正2】盒子宽度改为 6em (适配 "助理指导教师" 6个字)
                 % [s] 表示分散对齐
-                \newcommand{\fieldlabel}[1]{\makebox[4em][s]{##1}} 
+                \newcommand{\fieldlabel}[1]{\makebox[4em][s]{##1}}
 
                 % 逐行输出
-                \noindent \fieldlabel{学生}：王建华 \par
-                \noindent \fieldlabel{学号}：20XXXXXX \par
-                \noindent \fieldlabel{指导教师}：杨X \par
-                \noindent \fieldlabel{助理指导}教师：李X \par
-                \noindent \fieldlabel{专业}：XXXXXX \par
+                \noindent \fieldlabel{学生}：王锦源 \par
+                \noindent \fieldlabel{学号}：20221067 \par
+                \noindent \fieldlabel{指导教师}：赵霞 \par
+                \noindent \fieldlabel{助理指导}教师：XXX \par
+                \noindent \fieldlabel{专业}：电气工程及其自动化 \par
             \end{flushleft}
         }
 
@@ -140,54 +140,54 @@
 
         % --- 5. 学院名称 ---
         % 小二，居中
-        {\centering \heiti \zihao{-2} 重庆大学XXXXXX学院 \par}
+        {\centering \heiti \zihao{-2} 重庆大学电气工程及其自动化学院 \par}
 
         % --- 6. 日期 ---
         % 黑体三号，段前12磅，居中
         \vspace{21pt}
-        {\centering \heiti \zihao{3} 20XX年6月 \par}
-        
+        {\centering \heiti \zihao{3} 2026年6月 \par}
+
     \end{titlepage}
 }
 
 % 定义英文封面命令 \Englishmakecover
 \newcommand{\Englishmakecover}{
     \begin{titlepage}
-        \centering 
-        \singlespacing 
-        
+        \centering
+        \singlespacing
+
         % --- 1. 学校名称 / Header ---
         \vspace*{-7pt}
 
         % 【修改】使用 \rmfamily (Times New Roman) + \bfseries (加粗)
         { \rmfamily \bfseries \zihao{-3} Undergraduate Thesis (Design) of Chongqing University \par}
-        
+
         % --- 空两行 (小二) ---
         {\zihao{-2} \setlength{\baselineskip}{35pt}  \vspace{2\baselineskip}}
-        
+
         % --- 2. 论文题目 / Title ---
         % 【修改】字体改为 Times New Roman 加粗
-        { \rmfamily \bfseries \zihao{2} Study on Calculation method of XXX \par}
-        
-        % --- 空三行 (五号) ---
-        { \zihao{5} \setlength{\baselineskip}{17pt} \vspace{3\baselineskip}}
-        
+        { \rmfamily \bfseries \zihao{2} Research on Deep Learning Prediction Method for Wind Power \par}
+
+        % --- 空两行 (五号) ---
+        { \zihao{5} \setlength{\baselineskip}{14pt} \vspace{2\baselineskip}}
+
         % --- 3. 图片 / Logo ---
         \includegraphics[width=4.27cm, height=4.19cm]{figure/logo.png}
 
         % --- 空两行 (三号) ---
         { \zihao{3} \setlength{\baselineskip}{21.5pt} \vspace{2\baselineskip}}
-        
+
         % --- 学生个人信息 ---
         { \rmfamily \bfseries \zihao{3} By \vspace{16pt}}
 
-        { \rmfamily \bfseries \zihao{3} WANG Jianhua }
+        { \rmfamily \bfseries \zihao{3} WANG Jin Yuan }
 
         { \zihao{3} \setlength{\baselineskip}{32pt} \vspace{1\baselineskip} }
 
         { \rmfamily \bfseries \zihao{3} Supervised by \vspace{17pt}}
 
-        { \rmfamily \bfseries \zihao{3} Prof. YANG XX \vspace{16pt} }
+        { \rmfamily \bfseries \zihao{3} Prof. ZHAO Xia \vspace{16pt} }
 
         { \rmfamily \bfseries \zihao{3} and \vspace{17pt}}
 
@@ -196,23 +196,23 @@
         { \zihao{3} \setlength{\baselineskip}{33pt} \vspace{1\baselineskip} }
 
         % 专业    
-        { \rmfamily \bfseries \zihao{-2} XXXXXX \vspace{17pt}}
+        { \rmfamily \bfseries \zihao{-2} Electrical Engineering and Automation \vspace{17pt}}
 
         % 学院    
-        { \rmfamily \bfseries \zihao{-2} XXXXXX }
+        { \rmfamily \bfseries \zihao{-2} SCHOLL OF ELECTRICAL ENGINEERING \vspace{17pt}}
 
-        % --- 空两行 (三号) ---
-        {\zihao{3}  \setlength{\baselineskip}{12pt} \vspace{1\baselineskip}}
+        % --- Chongqing University 前间距（已缩小） ---
+
 
         % --- 5. 学院名称 / School Name ---
         % 【修改】字体改为 Times New Roman 加粗
-        {\centering \rmfamily \bfseries \zihao{-2} Chongqing University \par}
+        {\centering \rmfamily \bfseries \zihao{-2} Chongqing University \vspace{17pt}}
 
         % --- 6. 日期 / Date ---
-        \vspace{10pt}
+
         % 【修改】字体改为 Times New Roman 加粗
-        { \centering \rmfamily \bfseries \zihao{3} June, 20XX \par}
-        
+        { \centering \rmfamily \bfseries \zihao{3} June, 2026 }
+
     \end{titlepage}
 }
 
@@ -221,19 +221,19 @@
     \clearpage
     \phantomsection
     \addcontentsline{toc}{section}{摘要}
-    
+
     % 设置当前页面样式为摘要页样式
     \thispagestyle{cnabstractpage}
-    
+
     % --- 标题部分 ---
     \vspace*{-13pt}
-    
+
     \begin{center}
         \heiti \zihao{3} 摘\quad 要
     \end{center}
-    
+
     \vspace{8pt}
-    
+
     % --- 正文设置 ---
     \songti \zihao{-4}
     \setlength{\baselineskip}{20pt}
@@ -245,13 +245,13 @@
 % 定义关键词命令 \cnkeywords
 \newcommand{\cnkeywords}[1]{
     % 换行并留出间距
-    \par \vspace{20pt} 
+    \par \vspace{20pt}
     {
-    \setlength{\leftskip}{2.2em} % ← 这里调整整行的左缩进
-    \noindent
-    {\heiti \zihao{-4} 关键词：}
-    {\songti \zihao{-4} #1}
-    \par
+        \setlength{\leftskip}{2.2em} % ← 这里调整整行的左缩进
+        \noindent
+        {\heiti \zihao{-4} 关键词：}
+        {\songti \zihao{-4} #1}
+        \par
     }
     % 确保关键词后正确分页
     \clearpage
@@ -262,19 +262,19 @@
     \clearpage
     \phantomsection
     \addcontentsline{toc}{section}{ABSTRACT}
-    
+
     % 设置当前页面样式为摘要页样式
     \thispagestyle{enabstractpage} % 需要定义 enabstractpage 样式
-    
+
     % --- 标题部分 ---
     \vspace*{-13pt}
-    
+
     \begin{center}
         \rmfamily \bfseries \zihao{3} ABSTRACT
     \end{center}
-    
+
     \vspace{8pt}
-    
+
     % --- 正文设置 ---
     \rmfamily \zihao{-4} % Times New Roman 小四
     \setlength{\baselineskip}{20pt}
@@ -286,15 +286,15 @@
 % 定义英文关键词命令 \enkeywords
 \newcommand{\enkeywords}[1]{
     % 换行并留出间距
-    \par \vspace{20pt} 
+    \par \vspace{20pt}
     {
-    \setlength{\leftskip}{0em} % 与中文保持相同缩进
-    \noindent
-    {\rmfamily \bfseries \zihao{-4} Keywords: } % 加粗
-    {\rmfamily \zihao{-4} #1} % 不加粗
-    \par
+        \setlength{\leftskip}{0em} % 与中文保持相同缩进
+        \noindent
+        {\rmfamily \bfseries \zihao{-4} Keywords: } % 加粗
+        {\rmfamily \zihao{-4} #1} % 不加粗
+        \par
     }
-    
+
     % 确保关键词后正确分页
     \clearpage
 }
@@ -321,14 +321,14 @@
 
 \newcommand{\sectionbreak}{\clearpage}
 \titleformat{\section}%一级标题另起一页
-  {\vspace*{-5.2pt}\centering\heiti\fontspec{SimHei}\zihao{3}}{\thesection}{0.6em}{}  
-  %编号和标题之间的距离为0.5em，顶部距离，强制英文黑体
+{\vspace*{-5.2pt}\centering\heiti\fontspec{SimHei}\zihao{3}}{\thesection}{0.6em}{}
+%编号和标题之间的距离为0.5em，顶部距离，强制英文黑体
 
 \titleformat{\subsection}
-  {\heiti\fontspec{SimHei}\zihao{-3} }{\thesubsection}{0.6em}{}
+{\heiti\fontspec{SimHei}\zihao{-3} }{\thesubsection}{0.6em}{}
 
 \titleformat{\subsubsection}
-  {\heiti\fontspec{SimHei}\zihao{-3} }{\thesubsubsection}{0.6em}{}
+{\heiti\fontspec{SimHei}\zihao{-3} }{\thesubsubsection}{0.6em}{}
 
 % --- 设置二级标题 (subsection) 的间距 ---
 % \titlespacing{命令}{左缩进}{段前间距}{段后间距}
@@ -356,21 +356,21 @@
     \phantomsection
     % 添加目录到目录中
     % \addcontentsline{toc}{section}{\contentsname}
-    
+
     % 设置目录页页眉样式
     \thispagestyle{tablecontents} % 使用和摘要页相同的样式
     \fancyhead[R]{\songti\zihao{-5} 目录} % 修改右侧为"目录"
-    
+
     % 目录标题：黑体三号居中
     \begin{center}
         \heiti \bfseries \zihao{3} 目\quad 录
     \end{center}
-    
+
     \vspace{7pt} % 与摘要保持相同的间距
 
     % 开始生成目录
     \@starttoc{toc}
-    
+
     % 确保目录后正确分页
     \clearpage
 }
@@ -378,27 +378,27 @@
 % 设置目录条目格式
 % 一级标题（section）：黑体4号
 \titlecontents{section}
-  [2em] % 左缩进
-  {\addvspace{0pt}\heiti\zihao{4}\setlength{\baselineskip}{20pt}} % 格式
-  {\contentslabel{1.5em}} % 带编号的标签
-  {\hspace*{-1.5em}} % 无编号的标签
-  {\titlerule*[0.4em]{.}\contentspage} % 页码和引导符
-  
+[2em] % 左缩进
+{\addvspace{0pt}\heiti\zihao{4}\setlength{\baselineskip}{20pt}} % 格式
+{\contentslabel{1.5em}} % 带编号的标签
+{\hspace*{-1.5em}} % 无编号的标签
+{\titlerule*[0.4em]{.}\contentspage} % 页码和引导符
+
 % 二级标题（subsection）：黑体5号
 \titlecontents{subsection}
-  [2.7em] % 左缩进（比一级标题缩进2em）
-  {\addvspace{0pt}\heiti\zihao{5}\setlength{\baselineskip}{20pt}} % 格式
-  {\contentslabel{2em}} % 带编号的标签
-  {\hspace*{-2.7em}} % 无编号的标签
-  {\titlerule*[0.6em]{.}\contentspage} % 页码和引导符
+[2.7em] % 左缩进（比一级标题缩进2em）
+{\addvspace{0pt}\heiti\zihao{5}\setlength{\baselineskip}{20pt}} % 格式
+{\contentslabel{2em}} % 带编号的标签
+{\hspace*{-2.7em}} % 无编号的标签
+{\titlerule*[0.6em]{.}\contentspage} % 页码和引导符
 
 % 三级标题（subsubsection）：宋体5号
 \titlecontents{subsubsection}
-  [4em] % 左缩进（比二级标题再缩进2em）
-  {\addvspace{0pt}\songti\zihao{5}\setlength{\baselineskip}{20pt}} % 格式
-  {\contentslabel{2.5em}} % 带编号的标签
-  {\hspace*{-4em}} % 无编号的标签
-  {\titlerule*[0.5em]{.}\contentspage} % 页码和引导符
+[4em] % 左缩进（比二级标题再缩进2em）
+{\addvspace{0pt}\songti\zihao{5}\setlength{\baselineskip}{20pt}} % 格式
+{\contentslabel{2.5em}} % 带编号的标签
+{\hspace*{-4em}} % 无编号的标签
+{\titlerule*[0.5em]{.}\contentspage} % 页码和引导符
 
 % 超链接颜色设置
 \hypersetup{
@@ -413,15 +413,15 @@
 %% --- 设置公式与正文的间距 ---
 \AtBeginDocument{
     % 1. 公式上方默认间距
-    \setlength{\abovedisplayskip}{2.5pt} 
-    
+    \setlength{\abovedisplayskip}{2.5pt}
+
     % 2. 公式下方默认间距
     \setlength{\belowdisplayskip}{2.5pt}
-    
+
     % 3. 公式上方“短行”间距 
     % (当公式前一行的文字很短，没有碰到公式时，用这个较小的间距)
     \setlength{\abovedisplayshortskip}{0pt}
-    
+
     % 4. 公式下方“短行”间距
     \setlength{\belowdisplayshortskip}{3pt}
 }
