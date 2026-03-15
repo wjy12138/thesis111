@@ -16,13 +16,14 @@
 \RequirePackage{setspace}  % 行距控制
 \RequirePackage{fontspec}  % 字体设置
 \RequirePackage{fancyhdr} % 标题格式控制
+\RequirePackage{xurl}     % 【新增】允许URL在任意位置自动断行
 \RequirePackage{hyperref} % 超链接支持
 \RequirePackage{titletoc}  % 用于自定义目录格式
 \RequirePackage{titlesec}  % 用于自定义章节标题格式
 \RequirePackage{booktabs}  % 用于自定义章节标题格式
 \RequirePackage{caption}    % 【新增】用于控制标题格式
 \RequirePackage{etoolbox}   % 【新增】用于自动化设置表格内容字体
-\RequirePackage[square, super, comma, sort&compress]{natbib} % 参考文献支持
+\RequirePackage[super]{gbt7714} % 参考文献支持（内部已加载natbib）
 % 3. 配置英文主字体为 Times New Roman
 \setmainfont{Times New Roman}
 

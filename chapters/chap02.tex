@@ -1,36 +1,27 @@
 % 第2章 风电功率预测数据集与预处理
 \section{风电功率预测数据集与预处理}
 
-\subsection{数据集介绍}
-\subsubsection{数据来源}
-这里介绍了数据来源。
+\subsection{数据来源与数据集介绍}
 
-\subsubsection{数据特征描述}
-这里描述了数据的特征。
+\begin{sloppypar}
+本研究采用的风电场数据来源于公开数据集 \url{Renewable-energy-generation-input-feature-variables-analysis}，可通过 \url{https://github.com/Bob05757/Renewable-energy-generation-input-feature-variables-analysis} 获取。结合本课题上传的数据文件，本文共选取其中 6 个风电场站点数据作为实验对象，分别为风电场1（额定装机容量99\,MW）、风电场2（额定装机容量200\,MW）、风电场3（额定装机容量99\,MW）、风电场4（额定装机容量66\,MW）、风电场5（额定装机容量36\,MW）和风电场6（额定装机容量96\,MW）。6个风电场数据均包含 70176 条样本记录，时间范围覆盖 2019 年 1 月 1 日至 2020 年 12 月 31 日，时间分辨率为 15\,min，即每小时 4 个采样点，属于典型的超短期/短期风电功率预测数据。
 
-\subsection{数据预处理}
-\subsubsection{缺失值处理}
-这里是缺失值处理的内容。
+各风电场数据集的结构基本一致，均包含时间戳以及多种气象和运行特征，其中时间字段为 \texttt{Time(year-month-day h:m:s)}，用于表征样本采集时刻；气象特征主要包括 10\,m、30\,m 和 50\,m 高度处的风速与风向，轮毂高度处的风速与风向，以及空气温度、气压和相对湿度等变量。具体而言，输入特征字段共 12 个，分别为：Wind speed at height of 10 meters (m/s)、Wind direction at height of 10 meters (˚)、Wind speed at height of 30 meters (m/s)、Wind direction at height of 30 meters (˚)、Wind speed at height of 50 meters (m/s)、Wind direction at height of 50 meters (˚)、Wind speed at the height of wheel hub (m/s)、Wind speed at the height of wheel hub (˚)、Air temperature (°C)、Atmosphere (hpa)、Relative humidity (\%)，以及时间信息所隐含的时序变化特征。目标变量为 Power (MW)，表示对应时刻风电场的实际输出功率。
 
-\subsubsection{异常值检测与处理}
-这里是异常值检测与处理的内容。
+总体来看，该数据集具有时间跨度长、采样频率高、特征维度较丰富等特点，能够较全面地反映风电功率受多高度风速、风向及气象环境共同作用下的动态变化规律，因此适合作为深度学习模型开展风电功率预测研究的数据基础。
+\end{sloppypar}
 
-\subsubsection{数据归一化}
-这里是数据归一化的内容。
+\subsection{数据特征分析}
+分析风速、风向、温度、气压、湿度与功率之间的关系，不同风场差异性。
 
-\subsection{特征工程}
-\subsubsection{特征选择}
-这里是特征选择的内容。
+\subsection{缺失值与异常值处理}
+空值处理、异常点剔除或平滑。
 
-\subsubsection{特征相关性分析}
-这里是特征相关性分析的内容。
+\subsection{特征工程与归一化处理}
+特征选择、相关性分析、Min-Max归一化。
 
-\subsection{数据集划分}
-\subsubsection{训练集、验证集与测试集划分}
-这里是关于数据集划分的内容。
+\subsection{滑动时间窗口构造}
+说明如何把原始时间序列构造成监督学习样本。
 
-\subsubsection{时间序列数据的划分策略}
-这里是关于时序数据划分策略的内容。
-
-\subsection{本章小结}
-这里是本章小结的内容。
+\subsection{训练集、验证集和测试集划分}
+说明划分原则与实验设置。

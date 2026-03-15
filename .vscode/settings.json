@@ -12,6 +12,14 @@
             "env": {}
         },
         {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
             "name": "latexmk",
             "command": "latexmk",
             "args": [
@@ -27,6 +35,15 @@
     ],
     "latex-workshop.latex.recipes": [
         {
+            "name": "xelatex → bibtex → xelatex × 2",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "xelatex",
+                "xelatex"
+            ]
+        },
+        {
             "name": "xelatex",
             "tools": [
                 "xelatex"
@@ -39,6 +56,6 @@
             ]
         }
     ],
-    "latex-workshop.latex.recipe.default": "xelatex",
+    "latex-workshop.latex.recipe.default": "xelatex → bibtex → xelatex × 2",
     "latex-workshop.view.pdf.viewer": "tab"
 }
