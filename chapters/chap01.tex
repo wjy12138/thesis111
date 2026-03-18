@@ -13,6 +13,23 @@
 
 从方法演进来看，风电预测研究已经从早期的持续法、物理方法和统计方法，逐步发展到浅层机器学习方法和深度学习方法\cite{liuComprehensiveReviewWind2025b,yangSurveyWindPower2024}。传统方法在一定场景下具有实现简单或机理明确等优点，但在面对风电数据强非线性、多变量耦合、时序依赖显著以及不确定性强等特点时，往往难以兼顾预测精度与模型泛化能力\cite{liuDataProcessingStrategies2019,wuComprehensiveReviewDeep2022}。
 
+从预测时间尺度来看，风电功率预测主要包括超短期预测、短期预测和中长期预测。其中，超短期预测通常指15分钟到6小时的预测，主要用于电网调度和功率控制；短期预测通常指6小时到24小时的预测，主要用于电网调度和功率控制；中长期预测通常指24小时到7天的预测，主要用于电网调度和功率控制\cite{SunRongFuFengDianGongLuYuCeGuanJianJiShuJiYingYongZongShu2021,HanZiFenFengDianYuCeFangFaYuXinQuShiZongShu2019}。
+% 插入一个表格
+\begin{table}[h]
+\centering
+\caption{风电功率预测时间尺度}
+\label{tab:wind_power_prediction_time_scale}
+\begin{tabular}{|c|c|c|}
+\hline
+预测时间尺度 & 预测时间 & 应用场景 \\
+\hline
+超短期预测 & 15分钟到6小时 & 电网调度和功率控制 \\
+短期预测 & 6小时到24小时 & 电网调度和功率控制 \\
+中长期预测 & 24小时到7天 & 电网调度和功率控制 \\
+\hline
+\end{tabular}
+\end{table} 
+
 近年来，随着数据采集能力、计算能力和人工智能技术的快速发展，深度学习方法在风电功率预测中的应用越来越广泛\cite{wuComprehensiveReviewDeep2022,liuComprehensiveReviewWind2025b}。综述研究表明，卷积神经网络（CNN）、长短期记忆网络（LSTM）、门控循环单元（GRU）等模型在处理风电数据的非线性和复杂性方面具有明显优势\cite{wuComprehensiveReviewDeep2022,yangSurveyWindPower2024}。其中，CNN擅长提取局部特征以及多变量之间的潜在关联，LSTM和GRU在捕捉时间序列依赖关系和长期特征方面表现突出，而混合模型如CNN-LSTM则能够同时兼顾特征提取和时序建模，更适合处理风电功率这种兼具复杂波动性和时间相关性的时序数据\cite{duonghoangvuMultistepWindPower2025,LiDaZhongJiYuShenDuXueXiYuWuChaiXiuZhengDeChaoDuanQiFengDianGongLuYuCe2021}。
 
 此外，多模型融合、图神经网络以及Transformer等新型方法在风电功率预测中也展现出良好的应用潜力\cite{heEnhancedWindPower2025,yangSurveyWindPower2024}。基于此，围绕典型深度学习模型开展风电功率预测研究，不仅有助于提升预测精度和模型鲁棒性，也能够为新能源高比例接入背景下的风电场运行优化和电网调度提供理论依据与技术支持\cite{liuComprehensiveReviewWind2025b,wuComprehensiveReviewDeep2022}。
@@ -45,10 +62,10 @@
 
 但同时也应看到，当前研究仍存在一些不足。其一，单一模型在不同风场、不同气象条件和不同预测尺度下的泛化能力仍有限；其二，风电功率序列受噪声、异常值和数据缺失等因素影响明显，模型性能对数据质量较为敏感；其三，相比点预测，区间预测、概率预测和极端波动事件预测等更具工程价值的研究仍有进一步拓展空间；其四，部分先进模型结构较为复杂、参数较多，虽然预测性能较优，但在实际部署和工程实现中仍面临一定成本与难度\cite{XuManDuanQiFengDianGongLuYuCeWuChaiZongHePingJieFangFa2011,liuDataProcessingStrategies2019,yuanPredictionIntervalWind2019,heEnhancedWindPower2025}。
 
-因此，结合本科毕业设计的研究目标和实现条件，选取若干典型深度学习模型开展风电功率预测对比研究具有较强的可行性和现实意义。通过构建并比较 CNN、LSTM、GRU 以及 CNN-LSTM 等代表性模型在风电功率预测任务中的性能差异，可以较为系统地分析不同模型在特征提取、时序建模和预测鲁棒性方面的特点，为后续模型优化与工程应用提供参考依据。
+
 \subsection{本文主要研究内容}
 
-针对风电功率序列随机性强、波动性明显、非线性特征突出以及传统预测方法在复杂场景下预测精度受限等问题，本文围绕深度学习模型在风电功率预测中的应用展开研究，结合风电场历史运行数据与相关气象特征，构建多模型对比分析框架，对典型深度学习模型在风电功率预测任务中的性能进行研究与比较。本文的主要研究内容如下：
+针对风电功率序列随机性强、波动性明显、非线性特征突出以及传统预测方法在复杂场景下预测精度受限等问题，本文围绕深度学习模型在风电功率短期预测中的应用展开研究，结合风电场历史运行数据与相关气象特征，构建多模型对比分析框架，对典型深度学习模型在风电功率预测任务中的性能进行研究与比较。本文的主要研究内容如下：
 
 （1）对风电功率预测的研究背景、应用价值及国内外研究现状进行系统梳理。结合风电并网规模不断扩大以及新能源高比例接入电力系统的发展背景，分析风电功率预测在电网调度、功率控制、运行优化和风电消纳中的重要作用，综述风电功率预测方法从物理方法、统计方法到机器学习方法、深度学习方法的发展历程，总结当前研究的主要进展、热点方向及存在问题\cite{LiJingHuaFengDianGongLuYuCeJiShuYanJiuZongShu2017,HanZiFenFengDianYuCeFangFaYuXinQuShiZongShu2019,liuComprehensiveReviewWind2025b,yangSurveyWindPower2024}。
 
