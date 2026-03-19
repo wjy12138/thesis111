@@ -69,18 +69,17 @@
 
 （1）对风电功率预测的研究背景、应用价值及国内外研究现状进行系统梳理。结合风电并网规模不断扩大以及新能源高比例接入电力系统的发展背景，分析风电功率预测在电网调度、功率控制、运行优化和风电消纳中的重要作用，综述风电功率预测方法从物理方法、统计方法到机器学习方法、深度学习方法的发展历程，总结当前研究的主要进展、热点方向及存在问题\cite{LiJingHuaFengDianGongLuYuCeJiShuYanJiuZongShu2017,HanZiFenFengDianYuCeFangFaYuXinQuShiZongShu2019,liuComprehensiveReviewWind2025b,yangSurveyWindPower2024}。
 
-（2）完成风电功率预测数据集的预处理与样本构建。针对原始风电数据中可能存在的缺失值、异常值、量纲不一致及时间序列波动明显等问题，对数据集进行清洗、异常处理、特征分析与归一化处理，并采用滑动时间窗口方法将原始时间序列构造为适用于监督学习的输入输出样本，同时完成训练集、验证集和测试集的划分，为后续模型训练与实验分析提供可靠的数据基础\cite{liuDataProcessingStrategies2019,wuShortTermWindPower2022}。
+（2）完成风电功率预测数据集的预处理与样本构建。针对原始风电数据中可能存在的缺失值、异常值、量纲不一致及时间序列波动明显等问题，对数据集进行清洗、异常处理、特征分析与归一化处理，并采用滑动时间窗口方法将原始时间序列构造为适用于深度学习的输入输出样本，并完成训练集、验证集和测试集的划分，为后续模型训练与实验分析提供可靠的数据基础。
 
-（3）研究典型深度学习模型的基本原理及其在风电功率预测中的适用性。围绕卷积神经网络（CNN）、长短期记忆网络（LSTM）、门控循环单元（GRU）以及 CNN-LSTM 混合模型，分析各类模型在局部特征提取、时序依赖建模、多变量耦合分析等方面的特点，结合风电功率序列兼具复杂波动性与时间相关性的特征，明确不同模型在预测任务中的理论优势与局限性\cite{wuComprehensiveReviewDeep2022,duonghoangvuMultistepWindPower2025,liuComprehensiveReviewWind2025b}。
+（3）研究典型深度学习模型的基本原理及其在风电功率预测中的适用性。围绕卷积神经网络（CNN）、长短期记忆网络（LSTM）、门控循环单元（GRU）以及 CNN-LSTM 混合模型，分析各类模型在局部特征提取、时序依赖建模、多变量耦合分析等方面的特点，结合风电功率序列兼具复杂波动性与时间相关性的特征，明确不同模型在预测任务中的理论优势与局限性。
 
-（4）构建并实现 CNN、LSTM 和 GRU 三种单一深度学习预测模型。基于统一的数据输入方式和实验条件，分别设计 CNN、LSTM 和 GRU 风电功率预测模型，完成网络结构搭建、参数设置、模型训练及预测流程设计，对不同单一模型在风电功率预测任务中的表现进行初步分析，为后续混合模型构建与综合对比奠定基础\cite{ZhuQiaoMuJiYuChangDuanQiJiYiWangLuoDeFengDianChangFaDianGongLuChaoDuanQiYuCe2017,zhangShorttermForecastingUncertainty2019,niuWindPowerForecasting2020}。
-% 如果你的 .bib 中这篇 GRU 文献键名不是 niuWindPowerForecasting2020，请替换为实际键名
+（4）构建并实现 CNN、LSTM 和 GRU 三种单一深度学习预测模型。基于统一的数据输入方式和实验条件，分别设计 CNN、LSTM 和 GRU 风电功率预测模型，完成网络结构搭建、参数设置、模型训练及预测流程设计，对不同单一模型在风电功率预测任务中的表现进行初步分析，为后续混合模型构建与综合对比奠定基础。
 
-（5）构建基于 CNN-LSTM 的混合预测模型，并对其结构与参数进行优化。针对单一模型在局部特征提取能力或长期时序依赖建模能力方面的局限，设计 CNN-LSTM 混合模型，将卷积层的特征提取能力与 LSTM 的时序建模能力相结合，完成网络结构设计、训练流程构建与关键参数优化，并从理论上分析混合模型相较于单一模型的优势\cite{duonghoangvuMultistepWindPower2025,LiDaZhongJiYuShenDuXueXiYuWuChaiXiuZhengDeChaoDuanQiFengDianGongLuYuCe2021}。
+（5）构建基于 CNN-LSTM 的混合预测模型，并对其结构与参数进行优化。针对单一模型在局部特征提取能力或长期时序依赖建模能力方面的局限，设计 CNN-LSTM 混合模型，将卷积层的特征提取能力与 LSTM 的时序建模能力相结合，完成网络结构设计、训练流程构建与关键参数优化，并从理论上分析混合模型相较于单一模型的优势。
 
-（6）开展多模型对比实验与结果分析。基于统一的数据集和评价指标，分别对 CNN、LSTM、GRU 和 CNN-LSTM 四种模型开展风电功率预测实验，通过真实值与预测值曲线、误差变化曲线以及评价指标统计表，对不同模型在预测精度、波动跟踪能力、模型稳定性及泛化性能等方面进行综合对比分析，并进一步讨论误差来源及模型适用场景\cite{XuManDuanQiFengDianGongLuYuCeWuChaiZongHePingJieFangFa2011,zhangShorttermForecastingUncertainty2019,heEnhancedWindPower2025}。
+（6）开展多模型对比实验与结果分析。基于统一的数据集和评价指标，分别对 CNN、LSTM、GRU 和 CNN-LSTM 四种模型开展风电功率预测实验，通过真实值与预测值曲线、误差变化曲线以及评价指标统计表，对不同模型在预测精度、波动跟踪能力、模型稳定性及泛化性能等方面进行综合对比分析，并进一步讨论误差来源及模型适用场景。
 
-（7）总结全文研究工作，并对后续研究方向进行展望。在实验分析基础上，总结不同深度学习模型在风电功率预测中的性能特点，归纳本文的主要研究结论，并结合当前风电预测研究的发展趋势，对模型融合、误差修正、多步预测、概率预测以及引入注意力机制和 Transformer 等进一步研究方向进行展望\cite{heEnhancedWindPower2025,yangSurveyWindPower2024,liuComprehensiveReviewWind2025b}。
+（7）总结全文研究工作，并对后续研究方向进行展望。在实验分析基础上，总结不同深度学习模型在风电功率预测中的性能特点，归纳本文的主要研究结论，并结合当前风电预测研究的发展趋势，对模型融合、误差修正、多步预测、概率预测以及引入注意力机制和 Transformer 等进一步研究方向进行展望。
 
 \subsection{本文结构安排}
 
@@ -88,16 +87,15 @@
 
 第1章为绪论。主要介绍风电功率预测的研究背景与现实意义，阐述深度学习应用于风电功率预测的研究基础，综述国内外相关研究现状，分析当前研究中存在的主要问题，并说明本文的主要研究内容与整体结构安排。
 
-第2章为风电功率预测数据集与预处理。主要介绍实验所用风电功率数据集的来源、组成及基本特征，分析风速、风向、温度、气压、湿度等特征变量与功率之间的关系，并对原始数据进行缺失值处理、异常值处理、归一化处理和滑动时间窗口样本构造，最终完成训练集、验证集和测试集的划分，为模型训练与测试提供数据支撑\cite{liuDataProcessingStrategies2019,wuShortTermWindPower2022}。
+第2章为风电功率预测数据集与预处理。主要介绍实验所用风电功率数据集的来源、组成及基本特征，分析风速、风向、温度、气压、湿度等特征变量与功率之间的关系，并对原始数据进行缺失值处理、异常值处理、归一化处理和滑动时间窗口样本构造，最终完成训练集、验证集和测试集的划分，为模型训练与测试提供数据支撑。
 
-第3章为深度学习预测模型理论基础。主要介绍 CNN、LSTM、GRU 以及 CNN-LSTM 混合模型的基本原理、网络结构及其在时间序列预测中的适用特点，同时给出本文采用的模型评价指标、实验环境及主要超参数设置，为后续模型构建与实验分析提供理论依据\cite{wuComprehensiveReviewDeep2022,liuComprehensiveReviewWind2025b,duonghoangvuMultistepWindPower2025}。
+第3章为深度学习预测模型理论基础。主要介绍 CNN、LSTM、GRU 以及 CNN-LSTM 混合模型的基本原理、网络结构及其在时间序列预测中的适用特点，同时给出本文采用的模型评价指标、实验环境及主要超参数设置，为后续模型构建与实验分析提供理论依据。
 
-第4章为单一深度学习模型的风电功率预测建模。主要在统一实验条件下分别构建 CNN、LSTM 和 GRU 三种单一预测模型，介绍各模型的网络结构、输入输出形式、参数设置和训练流程，并结合初步实验结果分析不同单模型在风电功率预测任务中的表现特点\cite{ZhuQiaoMuJiYuChangDuanQiJiYiWangLuoDeFengDianChangFaDianGongLuChaoDuanQiYuCe2017,zhangShorttermForecastingUncertainty2019,niuWindPowerForecasting2020}。
-% 同样注意检查 GRU 文献的 bibkey
+第4章为单一深度学习模型的风电功率预测建模。主要在统一实验条件下分别构建 CNN、LSTM 和 GRU 三种单一预测模型，介绍各模型的网络结构、输入输出形式、参数设置和训练流程，并结合初步实验结果分析不同单模型在风电功率预测任务中的表现特点。
 
-第5章为基于 CNN-LSTM 的混合模型构建与优化。针对单一模型在风电功率预测中的局限性，分析构建 CNN-LSTM 混合模型的必要性，设计模型整体结构与预测流程，并对模型训练过程中的关键参数进行优化，在理论层面阐述混合模型在特征提取与时序建模协同方面的优势\cite{duonghoangvuMultistepWindPower2025,LiDaZhongJiYuShenDuXueXiYuWuChaiXiuZhengDeChaoDuanQiFengDianGongLuYuCe2021}。
+第5章为基于 CNN-LSTM 的混合模型构建与优化。针对单一模型在风电功率预测中的局限性，分析构建 CNN-LSTM 混合模型的必要性，设计模型整体结构与预测流程，并对模型训练过程中的关键参数进行优化，在理论层面阐述混合模型在特征提取与时序建模协同方面的优势。
 
-第6章为实验结果分析与模型对比。主要基于多个实验结果对 CNN、LSTM、GRU 和 CNN-LSTM 四种模型进行系统对比，通过预测曲线、误差曲线、散点图和评价指标表格等形式，从预测精度、鲁棒性、泛化能力和适用场景等角度展开分析，并总结不同模型的优缺点及误差来源\cite{XuManDuanQiFengDianGongLuYuCeWuChaiZongHePingJieFangFa2011,zhangShorttermForecastingUncertainty2019,heEnhancedWindPower2025}。
+第6章为实验结果分析与模型对比。主要基于多个实验结果对 CNN、LSTM、GRU 和 CNN-LSTM 四种模型进行系统对比，通过预测曲线、误差曲线、散点图和评价指标表格等形式，从预测精度、鲁棒性、泛化能力和适用场景等角度展开分析，并总结不同模型的优缺点及误差来源。
 
-第7章为结论与展望。主要对全文研究工作进行总结，概括本文在风电功率预测模型构建、实验分析与模型比较方面得到的主要结论，并结合深度学习在风电功率预测中的发展趋势，对后续研究方向进行展望\cite{heEnhancedWindPower2025,yangSurveyWindPower2024,liuComprehensiveReviewWind2025b}。
+第7章为结论与展望。主要对全文研究工作进行总结，概括本文在风电功率预测模型构建、实验分析与模型比较方面得到的主要结论，并结合深度学习在风电功率预测中的发展趋势，对后续研究方向进行展望。
 
