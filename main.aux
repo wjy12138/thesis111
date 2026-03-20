@@ -66,43 +66,47 @@
 \@writefile{lot}{\contentsline {table}{\numberline {2.3}{\ignorespaces 风电场数据集缺失值与异常值统计}}{9}{table.caption.7}\protected@file@percent }
 \newlabel{tab:missing_values}{{2.3}{9}{风电场数据集缺失值与异常值统计}{table.caption.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}数据可视化和特征相关性分析}{9}{subsection.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces 六个风场特征相关性热力图对比}}{10}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:heatmap_6farms}{{2.1}{10}{六个风场特征相关性热力图对比}{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}特征工程与归一化处理}{10}{subsection.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}滑动时间窗口构造}{10}{subsection.2.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}训练集、验证集和测试集划分}{11}{subsection.2.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}深度学习预测模型理论基础}{12}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}卷积神经网络CNN原理}{12}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}长短期记忆网络LSTM原理}{12}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}门控循环单元GRU原理}{12}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}CNN-LSTM混合模型原理}{12}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}模型评价指标}{12}{subsection.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}实验环境与超参数设置}{12}{subsection.3.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}单一深度学习模型的风电功率预测建模}{13}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}CNN预测模型构建}{13}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}LSTM预测模型构建}{13}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}GRU预测模型构建}{13}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}三种单模型训练流程设计}{13}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}单模型初步实验结果分析}{13}{subsection.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}基于CNN-LSTM的混合模型构建与优化}{14}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}构建CNN-LSTM混合模型的必要性分析}{14}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}CNN-LSTM网络结构设计}{14}{subsection.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}模型训练过程与参数优化}{14}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}CNN-LSTM模型预测流程}{14}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}混合模型相较于单模型的理论优势分析}{14}{subsection.5.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}实验结果分析与模型对比}{15}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}实验方案设计}{15}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}不同模型在同一风场上的预测结果对比}{15}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}同一模型在不同风场上的泛化性能分析}{15}{subsection.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}预测结果可视化分析}{15}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}基于MAPE、MAE、RMSE的综合评价}{15}{subsection.6.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}模型优缺点与误差来源分析}{15}{subsection.6.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}最优模型选择与适用场景讨论}{15}{subsection.6.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces 风电场不同变量的Pearson相关系数}}{10}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:heatmap_6farms}{{2.1}{10}{风电场不同变量的Pearson相关系数}{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces 六个风电场轮毂高度风速与输出功率散点图}}{11}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:wind_speed_power_scatter}{{2.2}{11}{六个风电场轮毂高度风速与输出功率散点图}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}特征工程与归一化处理}{11}{subsection.2.4}\protected@file@percent }
+\newlabel{eq:min_max_normalization}{{2.1}{11}{特征工程与归一化处理}{equation.2.1}{}}
+\newlabel{eq:sin_cos_transformation}{{2.2}{12}{特征工程与归一化处理}{equation.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}滑动时间窗口构造}{12}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}训练集、验证集和测试集划分}{12}{subsection.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}深度学习预测模型理论基础}{13}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}卷积神经网络CNN原理}{13}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}长短期记忆网络LSTM原理}{13}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}门控循环单元GRU原理}{13}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}CNN-LSTM混合模型原理}{13}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}模型评价指标}{13}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}实验环境与超参数设置}{13}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}单一深度学习模型的风电功率预测建模}{14}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}CNN预测模型构建}{14}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}LSTM预测模型构建}{14}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}GRU预测模型构建}{14}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}三种单模型训练流程设计}{14}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}单模型初步实验结果分析}{14}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}基于CNN-LSTM的混合模型构建与优化}{15}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}构建CNN-LSTM混合模型的必要性分析}{15}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}CNN-LSTM网络结构设计}{15}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}模型训练过程与参数优化}{15}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}CNN-LSTM模型预测流程}{15}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}混合模型相较于单模型的理论优势分析}{15}{subsection.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}实验结果分析与模型对比}{16}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}实验方案设计}{16}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}不同模型在同一风场上的预测结果对比}{16}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}同一模型在不同风场上的泛化性能分析}{16}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}预测结果可视化分析}{16}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}基于MAPE、MAE、RMSE的综合评价}{16}{subsection.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}模型优缺点与误差来源分析}{16}{subsection.6.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}最优模型选择与适用场景讨论}{16}{subsection.6.7}\protected@file@percent }
 \bibdata{ref1}
-\@writefile{toc}{\contentsline {section}{\numberline {7}结论与展望}{16}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}研究工作总结}{16}{subsection.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}主要结论}{16}{subsection.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}不足与展望}{16}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}结论与展望}{17}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}研究工作总结}{17}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}主要结论}{17}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}不足与展望}{17}{subsection.7.3}\protected@file@percent }
 \bibcite{liuComprehensiveReviewWind2025b}{{1}{2025}{{Liu et~al.}}{{Liu, Guo, Zhang, and Zuo}}}
 \bibcite{HanZiFenFengDianYuCeFangFaYuXinQuShiZongShu2019}{{2}{2019}{{{韩自奋}\ 等}}{{{韩自奋}, {景乾明}, {张彦凯}, {拜润卿}, {郭空明}, and {章云}}}}
 \bibcite{LiJingHuaFengDianGongLuYuCeJiShuYanJiuZongShu2017}{{3}{2017}{{{黎静华}\ 等}}{{{黎静华}, {桑川川}, {甘一夫}, and {潘毅}}}}
@@ -119,4 +123,4 @@
 \bibcite{yuanPredictionIntervalWind2019}{{14}{2019}{{Yuan et~al.}}{{Yuan, Chen, Jiang, and Yuan}}}
 \bibcite{wuShortTermWindPower2022}{{15}{2022}{{Wu et~al.}}{{Wu, Jiang, Lai, Zhao, and Lai}}}
 \ttl@finishall
-\gdef \@abspage@last{24}
+\gdef \@abspage@last{25}

@@ -95,18 +95,47 @@
 \subsection{数据可视化和特征相关性分析}
 输入特征的选择对提高预测精读至关重要，而相关性分析对于变量的选取具有重要意义。本文采用皮尔逊相关系数（The Pearson correlation coefficient,PCC）来分析各输入特征与输出变量之间的相关性，并结合热力图进行可视化分析。热力图如图\ref{fig:heatmap_6farms}所示。
 
+在功率方面，WS\_x(即,不同高度的风速)具有最高的PCC。轮毂高度对于风力机的每个模型来说是不同的，因此WS\_cen代表了不同的高度。风电场场址1、2、3、4、5、6的轮毂高度分别为85m、120m、80m、85m / 90m、90m、65m。因此风速对风电功率起主导作用，结合图\ref{fig:wind_speed_power_scatter}可以看出，实际风功率曲线呈现出典型的“S型”非线性特征：当风速低于切入风速或高于切出风速时，功率基本为零；在切入与额定风速之间，功率随风速增加呈近似三次方增长；达到额定风速后，功率维持在额定值附近波动。
+
+
+
+风向和功率呈现弱相关性，只在1风电场有0.3-0.4的PCC，其他风电场PCC都很低。
+
+温度、气压和湿度的Pearson相关系数在数值上表现为弱相关或极弱相关。然而，结合空气动力学原理$\rho=\frac{P}{R_sT_v}$可知，这三个物理量共同决定了空气密度。在相同的风速下，温度越低、气压越高、湿度越小，空气密度越大，风轮扫掠面积内蕴含的动能就越高。因此，温压湿主要是通过改变空气密度对风电功率产生非线性的微扰，这也是图\ref{fig:wind_speed_power_scatter}风速-功率散点图中主曲线上存在一定宽度（离散性）的重要原因之一。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figure/《图3-六个风场相关性热力图对比图》.png}
-    \caption{六个风场特征相关性热力图对比}
+    \includegraphics[width=\textwidth]{figure/《图3-六个风场相关性热力图对比图》.eps}
+    \caption{风电场不同变量的Pearson相关系数}
     \label{fig:heatmap_6farms}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figure/《图4-六个风场风速功率散点图》.eps}
+    \caption{六个风电场轮毂高度风速与输出功率散点图}
+    \label{fig:wind_speed_power_scatter}
+\end{figure}
+
 \subsection{特征工程与归一化处理}
-特征选择、相关性分析、Min-Max归一化。
+根据上节分析，本文将所有变量均作为输入变量，并采用Min-Max归一化处理。具体公式如下：
+\begin{equation}
+    \label{eq:min_max_normalization}
+    x_{norm} = \frac{x - x_{min}}{x_{max} - x_{min}}
+\end{equation}
+由于时间反应的季节也会对风电功率产生影响，因此将时间戳进行正余弦变换。具体公式如下：
+\begin{equation}
+    \label{eq:sin_cos_transformation}
+    \begin{cases}
+        hour\_sin = \sin\left(2\pi \dfrac{hour}{24}\right) \\[8pt]
+        hour\_cos = \cos\left(2\pi \dfrac{hour}{24}\right) \\[8pt]
+        day\_sin = \sin\left(2\pi \dfrac{day}{365}\right) \\[8pt]
+        day\_cos = \cos\left(2\pi \dfrac{day}{365}\right)
+    \end{cases}
+\end{equation}
+
 
 \subsection{滑动时间窗口构造}
-说明如何把原始时间序列构造成监督学习样本。
+
 
 \subsection{训练集、验证集和测试集划分}
-说明划分原则与实验设置。
+
