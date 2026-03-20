@@ -135,6 +135,14 @@
 
 
 \subsection{滑动时间窗口构造}
+本文建立的是时间序列预测模型，原长序列没有明确的输入输出，需要将数据构造成为成对的样本(X,y)。如图\ref{fig:sliding_window}所示，将前$n$个时间步的数据作为输入X，将第$n+1$个时间步的数据作为标签y。按照指定的步长滑动窗口，可以得到多个样本。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figure/slide window.png}
+    \caption{滑动时间窗口构造}
+    \label{fig:sliding_window}
+\end{figure}
+
 
 
 \subsection{训练集、验证集和测试集划分}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.11.11)  20 MAR 2026 13:28
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.11.11)  20 MAR 2026 21:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1038,40 +1038,50 @@ File: figure/《图4-六个风场风速功率散点图》.eps Graphic file (type
 
 [10]
 
-[11])
+[11]
+File: figure/slide window.png Graphic file (type bmp)
+<figure/slide window.png>
+)
 
-[12] (./chapters/chap03.tex)
+[12] (./chapters/chap03.tex
+File: figure/1Dcnn struct .png Graphic file (type bmp)
+<figure/1Dcnn struct .png>
+
 
 [13
 
 
-] (./chapters/chap04.tex)
+]
 
-[14
+[14])
 
-
-] (./chapters/chap05.tex)
-
-[15
-
-
-] (./chapters/chap06.tex)
+[15] (./chapters/chap04.tex)
 
 [16
 
 
-] (./chapters/chap07.tex) (./main.bbl
+] (./chapters/chap05.tex)
 
 [17
 
 
-]
+] (./chapters/chap06.tex)
 
 [18
 
+
+] (./chapters/chap07.tex) (./main.bbl
+
+[19
+
+
+]
+
+[20
+
 ])
 
-[19] (./main.aux)
+[21] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/07/14>
@@ -1080,12 +1090,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 10EC3AE4D04819506AFF9D211099611E;7800.
  ) 
 Here is how much of TeX's memory you used:
- 22968 strings out of 473831
- 478956 string characters out of 5733136
- 1078367 words of memory out of 5000000
- 45655 multiletter control sequences out of 15000+600000
- 564153 words of font info for 129 fonts, out of 8000000 for 9000
+ 22998 strings out of 473831
+ 479850 string characters out of 5733136
+ 1078463 words of memory out of 5000000
+ 45680 multiletter control sequences out of 15000+600000
+ 564177 words of font info for 132 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  107i,13n,125p,1273b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (25 pages).
+Output written on main.pdf (27 pages).
