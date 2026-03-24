@@ -97,31 +97,67 @@ LSTM门控机制包含三个部分，即遗忘门、输入门和输出门。
 其中，$\sigma(\cdot)$ 表示Sigmoid激活函数，$\cdot$ 表示向量点积，$[h_{t-1}, x_t]$ 表示将前一时刻的隐藏状态和当前时刻的输入拼接起来，$W_o$ 和 $b_o$ 分别表示输出门的权重矩阵和偏置项，$\odot$ 表示向量点积，$\tanh(\cdot)$ 表示tanh激活函数。
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.88\textwidth]{figure/lstm_struct_forget.png.png}
-    \caption{长短期记忆网络LSTM网络结构示意图}
+    \includegraphics[width=0.88\textwidth]{figure/lstm_struct_forget.png}
+    \caption{长短期记忆网络LSTM遗忘门}
     \label{fig:lstm_s}
 \end{figure}
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.88\textwidth]{figure/lstm_struct_input.png}
-    \caption{长短期记忆网络LSTM网络结构示意图}
-    \label{fig:lstm_struct_output}
+    \caption{LSTM输入门}
+    \label{fig:lstm_struct_input}
 \end{figure}
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.88\textwidth]{figure/lstm_struct_cell.png}
-    \caption{长短期记忆网络LSTM网络结构示意图}
+    \caption{LSTM细胞状态}
     \label{fig:lstm_struct_output}
 \end{figure}
 \subsection{门控循环单元GRU原理}
 门循环单元是LSTM的简化变体，它同样引入了门控机制，但结构比LSTM更简单，参数更少，因此计算效率更高。GRU通过引入更新门和重置门来控制隐状态，能够有效地捕捉序列中的长期依赖关系。
 \subsubsection{重置门和更新门}
-图描述了重置门和更新门的输入，输入是由前一时刻的隐状态和当前时刻的隐状态给出。两个门的输出由Sigmoid激活函数给出。对于给定的时间步$t$，假设输入是一个小量 $x_t \in \mathbb{R}^{n_{in}}$（样本个数，输入个数）， 上一个时间步的隐状态是 $H_{t-1} \in \mathbb{R}^{n_{hidden}}$（隐藏单元个数h）。 那么，重置门$R_t$和更新门$Z_t$的计算如下所示：
+图\ref{fig:gru_struct_forget}描述了重置门和更新门的输入，输入是由前一时刻的隐状态和当前时刻的隐状态给出。两个门的输出由Sigmoid激活函数给出。对于给定的时间步$t$，假设输入是一个小量 $x_t \in \mathbb{R}^{n_{in}}$（样本个数，输入个数）， 上一个时间步的隐状态是 $H_{t-1} \in \mathbb{R}^{n_{hidden}}$（隐藏单元个数h）。 那么，重置门$R_t$和更新门$Z_t$的计算如下所示：
 \begin{equation}
     R_t = \sigma(W_r \cdot [H_{t-1}, x_t] + b_r)
     Z_t = \sigma(W_z \cdot [H_{t-1}, x_t] + b_z)
 \end{equation}
 其中，$\sigma(\cdot)$ 表示Sigmoid激活函数，$\cdot$ 表示向量点积，$W_r$ 和 $b_r$ 分别表示重置门的权重矩阵和偏置项，$W_z$ 和 $b_z$ 分别表示更新门的权重矩阵和偏置项。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.88\textwidth]{figure/gru_struct_forget.png}
+    \caption{门控循环单元GRU重置门和更新门}
+    \label{fig:gru_struct_forget}
+\end{figure}
+\subsubsection{候选隐状态}
+在门控循环单元（GRU）结构中，候选隐状态（Candidate Hidden State）的核心作用是整合当前时刻的输入信息与经过选择后的历史信息。为了实现这一目标，我们将重置门 $\mathbf{R}_t$ 与传统的隐状态更新机制相结合。对于时间步 $t$，给定当前输入 $\mathbf{X}_t \in \mathbb{R}^{n \times d}$ 和上一时刻隐状态 $\mathbf{H}_{t-1} \in \mathbb{R}^{n \times h}$，候选隐状态 $\tilde{\mathbf{H}}_t \in \mathbb{R}^{n \times h}$ 的计算公式如下：$$\tilde{\mathbf{H}}_t = \tanh(\mathbf{X}_t \mathbf{W}_{xh} + (\mathbf{R}_t \odot \mathbf{H}_{t-1}) \mathbf{W}_{hh} + \mathbf{b}_h)$$其中，$\mathbf{W}_{xh} \in \mathbb{R}^{d \times h}$ 和 $\mathbf{W}_{hh} \in \mathbb{R}^{h \times h}$ 为可学习的权重参数，$\mathbf{b}_h \in \mathbb{R}^{1 \times h}$ 为偏置项。符号 $\odot$ 表示 Hadamard 积（按元素乘法）。在此计算过程中，我们采用 $\tanh$ 非线性激活函数，以确保候选隐状态的值域被限制在 $(-1, 1)$ 区间内。该机制设计的精妙之处在于重置门 $\mathbf{R}_t$ 对历史状态的影响力控制：信息保留： 当重置门 $\mathbf{R}_t$ 的元素接近 1 时，模型倾向于保留上一时刻的隐状态，此时的计算流程退化为传统的循环神经网络（RNN）更新模式。状态重置： 当重置门 $\mathbf{R}_t$ 的元素接近 0 时，上一时刻的隐状态 $\mathbf{H}_{t-1}$ 将被“丢弃”。此时，候选隐状态主要取决于当前输入 $\mathbf{X}_t$，其本质相当于一个以 $\mathbf{X}_t$ 为输入的多层感知机（MLP）输出。通过这种方式，重置门允许模型在处理序列数据时，灵活地选择忽略与当前语义无关的历史信息，从而有效地缓解了梯度消失问题，增强了模型捕获短期依赖关系的能力。
+
+
+
+\subsubsection{隐状态更新}
+
+在得到候选隐状态 $\tilde{\mathbf{H}}_t$ 后，GRU 通过更新门 $\mathbf{Z}_t$ 确定当前时刻最终的隐状态 $\mathbf{H}_t \in \mathbb{R}^{n \times h}$。这一步实际上是对旧状态 $\mathbf{H}_{t-1}$ 和新候选状态 $\tilde{\mathbf{H}}_t$ 之间进行按元素的凸组合（Convex Combination）。
+
+最终的隐状态更新公式为：
+\begin{equation}
+\mathbf{H}_t = \mathbf{Z}_t \odot \mathbf{H}_{t-1} + (1 - \mathbf{Z}_t) \odot \tilde{\mathbf{H}}_t
+\end{equation}
+
+具体的计算流程及数据流向如图 \ref{fig:gru_structure} 所示。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figure/gru_structure.png} % 请在此处替换为您的图片路径
+    \caption{GRU 单元内部结构与隐状态更新流程}
+    \label{fig:gru_structure}
+\end{figure}
+
+更新门 $\mathbf{Z}_t$ 的引入使得模型具备了强大的长程依赖捕获能力：
+\begin{itemize}
+    \item \textbf{信息传递：} 当 $\mathbf{Z}_t$ 趋于 1 时，模型倾向于忽略当前时刻的输入，直接将旧状态 $\mathbf{H}_{t-1}$ 传递至下一时刻，从而有效避免了深层网络中的梯度消失问题。
+    \item \textbf{信息融合：} 当 $\mathbf{Z}_t$ 趋于 0 时，新的隐状态将融合更多的候选状态信息，实现记忆的实时更新。
+\end{itemize}
+
+这种精巧的设计使得 GRU 能够根据时序数据的特性，自主决定历史信息的留存与更新。
 
 \subsection{CNN-LSTM混合模型原理}
 写CNN负责提取局部时序特征、LSTM负责捕捉长期依赖。
