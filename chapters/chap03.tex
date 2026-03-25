@@ -1,5 +1,5 @@
-% 第3章 深度学习预测模型理论基础
-\section{深度学习预测模型理论基础}
+% 第3章 深度学习预测模型构建
+\section{深度学习预测模型构建}
 
 \subsection{卷积神经网络CNN原理}
 
@@ -157,12 +157,51 @@ LSTM门控机制包含三个部分，即遗忘门、输入门和输出门。
     \item \textbf{信息融合：} 当 $\mathbf{Z}_t$ 趋于 0 时，新的隐状态将融合更多的候选状态信息，实现记忆的实时更新。
 \end{itemize}
 
-这种精巧的设计使得 GRU 能够根据时序数据的特性，自主决定历史信息的留存与更新。
-
+总之门控循环单元的重置门有助于捕获序列中的短期依赖关系，更新门有助于捕获序列中的长期依赖关系。
 \subsection{CNN-LSTM混合模型原理}
-写CNN负责提取局部时序特征、LSTM负责捕捉长期依赖。
-
+经过预处理后，卷积神经网络负责提取时间序列中的局部特征。一维卷积神经网络在时间序列特征提取上表现良好，其卷积核沿固定方向滑动，提取时间维度上的特征。接着长短其记忆网络将卷积神经网络提取的特征作为输入，对特征进行处理，提取时间序列中的长期依赖关系。CNN-LSTM的流程如图\ref{fig:cnn_lstm_structure}所示。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.88\textwidth]{figure/cnn_lstm_structure.png}
+    \caption{CNN-LSTM混合模型流程}
+    \label{fig:cnn_lstm_structure}
+\end{figure}
 \subsection{模型评价指标}
-MSE
+\subsection{模型评价指标}
+
+为客观评价各预测模型在风电功率预测任务中的性能，本文结合风电功率序列具有波动性强、随机性高、非线性明显等特点，选取平均绝对误差（Mean Absolute Error, MAE）和决定系数（Coefficient of Determination, $R^2$）作为模型评价指标。风电功率预测研究中，MAE因其能够直接反映预测值与真实值之间的平均偏离程度、且不易受到正负误差相互抵消的影响，被广泛用于衡量预测精度；同时，$R^2$能够反映模型对实际功率变化趋势的拟合能力，因此二者结合可从误差大小和整体拟合效果两个方面较为全面地评价模型性能:contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}。
+
+平均绝对误差定义为
+\begin{equation}
+\mathrm{MAE}=\frac{1}{n}\sum_{i=1}^{n}\left|y_i-\hat{y}_i\right|
+\end{equation}
+式中：$n$表示测试样本数；$y_i$表示第$i$个样本的真实风电功率值；$\hat{y}_i$表示第$i$个样本的预测值。MAE的物理意义明确，表示预测结果与真实结果之间平均相差多少。该指标越小，说明模型预测误差越小，预测精度越高。相较于均方误差类指标，MAE不会过度放大个别极端误差，更适合用于评价波动较大的风电功率预测结果。
+
+决定系数$R^2$定义为
+\begin{equation}
+R^2 = 1-\frac{\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}{\sum_{i=1}^{n}(y_i-\bar{y})^2}
+\end{equation}
+式中：$\bar{y}$表示真实风电功率序列的平均值。$R^2$用于衡量模型对真实数据变化规律的解释能力，其取值范围通常为$(-\infty,1]$。当$R^2$越接近于1时，说明模型对风电功率变化趋势的拟合效果越好；当$R^2$较小甚至为负时，则表明模型预测效果较差，甚至不如直接采用样本均值作为预测结果。
+
+综合来看，MAE能够直观反映模型预测误差的绝对水平，$R^2$能够体现模型对风电功率整体变化趋势的拟合程度。本文采用这两个指标对CNN、LSTM、GRU及CNN-LSTM等模型的预测结果进行统一评价，以保证不同模型之间比较的客观性和一致性。
 \subsection{实验环境与超参数设置}
 写编程环境、硬件平台、学习率、batch size、epoch、损失函数、优化器等。
+
+\subsection{模型网络结构与训练流程设计}
+
+\subsubsection{CNN预测模型构建}
+写网络结构、输入输出维度、参数设置、优缺点。
+
+\subsubsection{LSTM预测模型构建}
+写网络层数、隐藏单元数、预测流程。
+
+\subsubsection{GRU预测模型构建}
+写其轻量化优势和实现过程。
+
+\subsubsection{CNN-LSTM混合模型构建}
+写输入层、卷积层、池化层、LSTM层、全连接层的网络结构设计。
+解释为什么单一模型有局限，混合模型在特征提取与时序建模协同方面的优势。
+写模型训练过程中的关键参数优化（学习率调整、dropout、epoch设置等）。
+
+\subsubsection{统一训练流程设计}
+写统一的数据输入方式、训练流程图、停止准则。

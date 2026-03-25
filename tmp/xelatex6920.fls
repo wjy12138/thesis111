@@ -1,0 +1,5 @@
+PWD c:/Users/Don/Documents/毕设/thesis111
+INPUT c:/texlive/2024/texmf.cnf
+INPUT c:/texlive/2024/texmf-dist/web2c/texmf.cnf
+INPUT c:/texlive/2024/texmf-var/web2c/xetex/xelatex.fmt
+INPUT c:/Users/Don/Documents/毕设/thesis111/main.tex
