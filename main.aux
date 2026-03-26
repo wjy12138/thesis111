@@ -103,26 +103,47 @@
 \newlabel{fig:cnn_lstm_structure}{{3.8}{19}{CNN-LSTM混合模型流程}{figure.caption.18}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5}模型评价指标}{19}{subsection.3.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.6}模型评价指标}{19}{subsection.3.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}实验环境与超参数设置}{20}{subsection.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}实验环境}{20}{subsection.3.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.8}模型网络结构与训练流程设计}{20}{subsection.3.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces 模型网络结构}}{20}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:model_structure}{{3.9}{20}{模型网络结构}{figure.caption.19}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.8.1}CNN预测模型构建}{20}{subsubsection.3.8.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.8.2}LSTM预测模型构建}{20}{subsubsection.3.8.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.8.3}GRU预测模型构建}{20}{subsubsection.3.8.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.8.4}CNN-LSTM混合模型构建}{20}{subsubsection.3.8.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.8.5}统一训练流程设计}{20}{subsubsection.3.8.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}算例分析}{21}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}实验方案设计}{21}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}不同模型在同一风场上的预测结果对比}{21}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}同一模型在不同风场上的泛化性能分析}{21}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}预测结果可视化分析}{21}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}基于MAPE、MAE、RMSE的综合评价}{21}{subsection.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}模型优缺点与误差来源分析}{21}{subsection.4.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}最优模型选择与适用场景讨论}{21}{subsection.4.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces CNN超参数配置}}{21}{table.caption.20}\protected@file@percent }
+\newlabel{tab:cnn_hyperparameters}{{3.1}{21}{CNN超参数配置}{table.caption.20}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.8.2}LSTM预测模型构建}{21}{subsubsection.3.8.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces LSTM超参数配置}}{21}{table.caption.21}\protected@file@percent }
+\newlabel{tab:lstm_hyperparameters}{{3.2}{21}{LSTM超参数配置}{table.caption.21}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.8.3}GRU预测模型构建}{21}{subsubsection.3.8.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces GRU超参数配置}}{21}{table.caption.22}\protected@file@percent }
+\newlabel{tab:gru_hyperparameters}{{3.3}{21}{GRU超参数配置}{table.caption.22}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.8.4}CNN-LSTM混合模型构建}{21}{subsubsection.3.8.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces CNN-LSTM超参数配置}}{22}{table.caption.23}\protected@file@percent }
+\newlabel{tab:cnn_lstm_hyperparameters}{{3.4}{22}{CNN-LSTM超参数配置}{table.caption.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}算例分析}{23}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}实验方案设计}{23}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}不同模型在同一风场上的预测结果对比}{23}{subsection.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces 六个风场在不同模型下的预测指标对比}}{24}{table.caption.24}\protected@file@percent }
+\newlabel{tab:case_metrics_by_site}{{4.1}{24}{六个风场在不同模型下的预测指标对比}{table.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces 风场5在三种模型下的预测指标对比}}{24}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:site5_model_compare}{{4.1}{24}{风场5在三种模型下的预测指标对比}{figure.caption.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces 风场5中 CNN-LSTM 与 CNN 的预测结果对比。左图为 CNN-LSTM，右图为 CNN。}}{24}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:site5_cnn_lstm_pred}{{4.2}{24}{风场5中 CNN-LSTM 与 CNN 的预测结果对比。左图为 CNN-LSTM，右图为 CNN。}{figure.caption.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}同一模型在不同风场上的泛化性能分析}{24}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces 不同风场上的代表性预测结果。左图为风场4的 LSTM 结果，中图为风场5的 CNN-LSTM 结果，右图为风场6的 LSTM 结果。}}{25}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:cross_site_prediction_examples}{{4.3}{25}{不同风场上的代表性预测结果。左图为风场4的 LSTM 结果，中图为风场5的 CNN-LSTM 结果，右图为风场6的 LSTM 结果。}{figure.caption.27}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}预测结果可视化分析}{25}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces 风场5中 CNN-LSTM 模型的可视化结果。左上为整体预测图，右上为局部放大图，左下为误差曲线，右下为散点图。}}{26}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:site5_visuals}{{4.4}{26}{风场5中 CNN-LSTM 模型的可视化结果。左上为整体预测图，右上为局部放大图，左下为误差曲线，右下为散点图。}{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}基于 MSE、MAE、R\textsuperscript  {2} 的综合评价}{26}{subsection.4.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces 三种模型跨风场平均指标与最优次数统计}}{26}{table.caption.29}\protected@file@percent }
+\newlabel{tab:case_metrics_avg}{{4.2}{26}{三种模型跨风场平均指标与最优次数统计}{table.caption.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}模型优缺点与误差来源分析}{27}{subsection.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}最优模型选择与适用场景讨论}{27}{subsection.4.7}\protected@file@percent }
 \bibdata{ref1}
-\@writefile{toc}{\contentsline {section}{\numberline {5}结论与展望}{22}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}研究工作总结}{22}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}主要结论}{22}{subsection.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}不足与展望}{22}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}结论与展望}{28}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}研究工作总结}{28}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}主要结论}{28}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}不足与展望}{28}{subsection.5.3}\protected@file@percent }
 \bibcite{liuComprehensiveReviewWind2025b}{{1}{2025}{{Liu et~al.}}{{Liu, Guo, Zhang, and Zuo}}}
 \bibcite{HanZiFenFengDianYuCeFangFaYuXinQuShiZongShu2019}{{2}{2019}{{{韩自奋}\ 等}}{{{韩自奋}, {景乾明}, {张彦凯}, {拜润卿}, {郭空明}, and {章云}}}}
 \bibcite{LiJingHuaFengDianGongLuYuCeJiShuYanJiuZongShu2017}{{3}{2017}{{{黎静华}\ 等}}{{{黎静华}, {桑川川}, {甘一夫}, and {潘毅}}}}
@@ -139,4 +160,4 @@
 \bibcite{yuanPredictionIntervalWind2019}{{14}{2019}{{Yuan et~al.}}{{Yuan, Chen, Jiang, and Yuan}}}
 \bibcite{wuShortTermWindPower2022}{{15}{2022}{{Wu et~al.}}{{Wu, Jiang, Lai, Zhao, and Lai}}}
 \ttl@finishall
-\gdef \@abspage@last{30}
+\gdef \@abspage@last{36}

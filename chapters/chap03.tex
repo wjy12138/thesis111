@@ -184,24 +184,138 @@ R^2 = 1-\frac{\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}{\sum_{i=1}^{n}(y_i-\bar{y})^2}
 式中：$\bar{y}$表示真实风电功率序列的平均值。$R^2$用于衡量模型对真实数据变化规律的解释能力，其取值范围通常为$(-\infty,1]$。当$R^2$越接近于1时，说明模型对风电功率变化趋势的拟合效果越好；当$R^2$较小甚至为负时，则表明模型预测效果较差，甚至不如直接采用样本均值作为预测结果。
 
 综合来看，MAE能够直观反映模型预测误差的绝对水平，$R^2$能够体现模型对风电功率整体变化趋势的拟合程度。本文采用这两个指标对CNN、LSTM、GRU及CNN-LSTM等模型的预测结果进行统一评价，以保证不同模型之间比较的客观性和一致性。
-\subsection{实验环境与超参数设置}
-写编程环境、硬件平台、学习率、batch size、epoch、损失函数、优化器等。
-
+\subsection{实验环境}
+本文的实验环境为linux服务器，操作系统为Ubuntu20.04，深度学习框架为pytorch1.13.1，编程语言为python3.12，处理器为Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz，显卡为NVIDIA GeForce RTX 3090，内存为128GB。
 \subsection{模型网络结构与训练流程设计}
-
+本文将经过处理后的数据分别用不同的神经网络模型进行训练10轮然后取验证集上的最优模型对测试集进行预测，并对四种模型进行对比。整体网络结构如图\ref{fig:model_structure}所示。
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.88\textwidth]{figure/1Dcnn struct .png}
+    \caption{模型网络结构}
+    \label{fig:model_structure}
+\end{figure}
 \subsubsection{CNN预测模型构建}
-写网络结构、输入输出维度、参数设置、优缺点。
+CNN的超参数配置如表 \ref{tab:cnn_hyperparameters}所示。
+\begin{table}[htbp]
+    \centering
+    \caption{CNN超参数配置}
+    \label{tab:cnn_hyperparameters}
+    \begin{tabular}{|l|l|}
+    \hline
+    \multicolumn{2}{|l|}{CNN超参数配置} \\
+    \hline
+    \multicolumn{1}{|l|}{超参数} & \multicolumn{1}{l|}{配置} \\
+    \hline
+    \multicolumn{1}{|l|}{输入维度} & \multicolumn{1}{l|}{(96, 特征数)} \\
+    \hline
+    \multicolumn{1}{|l|}{输出维度} & \multicolumn{1}{l|}{12} \\
+    \hline
+    \multicolumn{1}{|l|}{卷积层} & \multicolumn{1}{l|}{32个卷积核，卷积核大小为3} \\
+    \hline
+    \multicolumn{1}{|l|}{池化层} & \multicolumn{1}{l|}{最大池化，池化窗口大小为2} \\
+    \hline
+    \multicolumn{1}{|l|}{全连接层} & \multicolumn{1}{l|}{128个神经元} \\
+    \hline
+    \multicolumn{1}{|l|}{dropout} & \multicolumn{1}{l|}{0.4} \\
+    \hline
+    \multicolumn{1}{|l|}{学习率} & \multicolumn{1}{l|}{0.001} \\
+    \hline
+    \multicolumn{1}{|l|}{batch size} & \multicolumn{1}{l|}{64} \\
+    \hline
+    \multicolumn{1}{|l|}{epoch} & \multicolumn{1}{l|}{10} \\
+    \hline
+    \end{tabular}
+\end{table}
 
 \subsubsection{LSTM预测模型构建}
-写网络层数、隐藏单元数、预测流程。
+LSTM的超参数配置如表 \ref{tab:lstm_hyperparameters}所示。
+\begin{table}[htbp]
+    \centering
+    \caption{LSTM超参数配置}
+    \label{tab:lstm_hyperparameters}
+    \begin{tabular}{|l|l|}
+    \hline
+    \multicolumn{2}{|l|}{LSTM超参数配置} \\
+    \hline
+    \multicolumn{1}{|l|}{超参数} & \multicolumn{1}{l|}{配置} \\
+    \hline
+    \multicolumn{1}{|l|}{输入维度} & \multicolumn{1}{l|}{(96, 特征数)} \\
+    \hline
+    \multicolumn{1}{|l|}{输出维度} & \multicolumn{1}{l|}{12} \\
+    \hline
+    \multicolumn{1}{|l|}{隐藏层} & \multicolumn{1}{l|}{128个隐藏单元，4层} \\
+    \hline
+    \multicolumn{1}{|l|}{dropout} & \multicolumn{1}{l|}{0.4} \\
+    \hline
+    \multicolumn{1}{|l|}{学习率} & \multicolumn{1}{l|}{0.001} \\
+    \hline
+    \multicolumn{1}{|l|}{batch size} & \multicolumn{1}{l|}{64} \\
+    \hline
+    \multicolumn{1}{|l|}{epoch} & \multicolumn{1}{l|}{10} \\
+    \hline
+    \end{tabular}
+\end{table}
 
 \subsubsection{GRU预测模型构建}
-写其轻量化优势和实现过程。
+GRU的超参数配置如表 \ref{tab:gru_hyperparameters}所示。
+\begin{table}[htbp]
+    \centering
+    \caption{GRU超参数配置}
+    \label{tab:gru_hyperparameters}
+    \begin{tabular}{|l|l|}
+    \hline
+    \multicolumn{2}{|l|}{GRU超参数配置} \\
+    \hline
+    \multicolumn{1}{|l|}{超参数} & \multicolumn{1}{l|}{配置} \\
+    \hline
+    \multicolumn{1}{|l|}{输入维度} & \multicolumn{1}{l|}{(12, 1)} \\
+    \hline
+    \multicolumn{1}{|l|}{输出维度} & \multicolumn{1}{l|}{1} \\
+    \hline
+    \multicolumn{1}{|l|}{隐藏层} & \multicolumn{1}{l|}{64个隐藏单元} \\
+    \hline
+    \multicolumn{1}{|l|}{dropout} & \multicolumn{1}{l|}{0.2} \\
+    \hline
+    \multicolumn{1}{|l|}{学习率} & \multicolumn{1}{l|}{0.001} \\
+    \hline
+    \multicolumn{1}{|l|}{batch size} & \multicolumn{1}{l|}{32} \\
+    \hline
+    \multicolumn{1}{|l|}{epoch} & \multicolumn{1}{l|}{100} \\
+    \hline
+    \end{tabular}
+\end{table}
 
 \subsubsection{CNN-LSTM混合模型构建}
-写输入层、卷积层、池化层、LSTM层、全连接层的网络结构设计。
-解释为什么单一模型有局限，混合模型在特征提取与时序建模协同方面的优势。
-写模型训练过程中的关键参数优化（学习率调整、dropout、epoch设置等）。
-
-\subsubsection{统一训练流程设计}
-写统一的数据输入方式、训练流程图、停止准则。
+CNN-LSTM的超参数配置如表 \ref{tab:cnn_lstm_hyperparameters}所示。
+\begin{table}[htbp]
+    \centering
+    \caption{CNN-LSTM超参数配置}
+    \label{tab:cnn_lstm_hyperparameters}
+    \begin{tabular}{|l|l|}
+    \hline
+    \multicolumn{2}{|l|}{CNN-LSTM超参数配置} \\
+    \hline
+    \multicolumn{1}{|l|}{超参数} & \multicolumn{1}{l|}{配置} \\
+    \hline
+    \multicolumn{1}{|l|}{输入维度} & \multicolumn{1}{l|}{(96, 特征数)} \\
+    \hline
+    \multicolumn{1}{|l|}{输出维度} & \multicolumn{1}{l|}{12} \\
+    \hline
+    \multicolumn{1}{|l|}{卷积层1} & \multicolumn{1}{l|}{32个卷积核，卷积核大小为3} \\
+    \hline
+    \multicolumn{1}{|l|}{卷积层2} & \multicolumn{1}{l|}{64个卷积核，卷积核大小为3} \\
+    \hline
+    \multicolumn{1}{|l|}{池化层} & \multicolumn{1}{l|}{最大池化，池化窗口大小为2} \\
+    \hline
+    \multicolumn{1}{|l|}{LSTM层} & \multicolumn{1}{l|}{128个隐藏单元，4层} \\
+    \hline
+    \multicolumn{1}{|l|}{dropout} & \multicolumn{1}{l|}{0.4} \\
+    \hline
+    \multicolumn{1}{|l|}{学习率} & \multicolumn{1}{l|}{0.001} \\
+    \hline
+    \multicolumn{1}{|l|}{batch size} & \multicolumn{1}{l|}{64} \\
+    \hline
+    \multicolumn{1}{|l|}{epoch} & \multicolumn{1}{l|}{10} \\
+    \hline
+    \end{tabular}
+\end{table}

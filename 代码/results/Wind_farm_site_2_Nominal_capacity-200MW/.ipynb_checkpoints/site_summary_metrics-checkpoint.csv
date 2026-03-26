@@ -1,0 +1,4 @@
+﻿site_name,model_name,lookback,look_forward,batch_size,learning_rate,hidden_size,num_layers,epochs,dropout,mse,mae,r2,train_time
+Wind farm site 2 (Nominal capacity-200MW),LSTM,24,1,64,0.001,64,2,30,0.2,48.212486267089844,4.081181049346924,0.9851350784301758,69.45519661903381
+Wind farm site 2 (Nominal capacity-200MW),CNN,24,1,64,0.001,64,2,30,0.2,52.39407730102539,4.404444217681885,0.9838458299636841,52.91047477722168
+Wind farm site 2 (Nominal capacity-200MW),CNN_LSTM,24,1,64,0.001,64,2,30,0.2,55.80711364746094,4.624515533447266,0.9827935099601746,79.7992570400238
