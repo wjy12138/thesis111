@@ -1,0 +1,4 @@
+﻿site_name,model_name,lookback,look_forward,batch_size,learning_rate,hidden_size,num_layers,epochs,dropout,checkpoint_selection,mse,rmse,mae,r2,train_time
+Wind farm site 1 (Nominal capacity-99MW),LSTM,96,3,64,0.001,64,2,20,0.2,last_epoch,59.80377197265625,7.733289854431699,4.362576961517334,0.9086443781852722,49.25487494468689
+Wind farm site 1 (Nominal capacity-99MW),CNN_LSTM,96,3,64,0.001,64,2,20,0.2,last_epoch,46.93523406982422,6.850929431093581,3.9085144996643066,0.9283022284507751,63.96698331832886
+Wind farm site 1 (Nominal capacity-99MW),CNN,96,3,64,0.001,64,2,20,0.2,last_epoch,52.32282638549805,7.233451899715519,4.42767858505249,0.9200721979141235,42.58945417404175

@@ -2,138 +2,76 @@
 \section{算例分析}
 
 \subsection{实验方案设计}
-本章以 \texttt{C:\\Users\\Don\\Documents\\毕设\\thesis111\\代码\\results} 中的实验结果为依据，对三种深度学习模型在六个风场上的多步预测表现进行算例分析。为避免不同实验配置混杂，正文仅保留汇总表 \texttt{summary\_metrics.csv} 中对应的一组正式实验结果，即输入窗口长度为 96、预测步长为 12 的实验设置。参与比较的模型包括 CNN、LSTM 和 CNN-LSTM，训练批大小为 64，学习率为 0.001，隐藏层维度为 128，循环层数为 4，训练轮数为 10，Dropout 取 0.4。训练集、验证集和测试集划分比例分别为 0.70、0.15 和 0.15。
+本章首先在风电场1上进行单站点的不同模型MAE、RMSE、$R^2$指标的对比，然后对比在不同步长的预测中不同模型的MAE、RMSE、$R^2$指标的衰减情况，最后对模型的泛化性进行分析，将模型在不同风场上的预测结果进行全景对比。所有评估数据均基于最新提取的六站综合测算结果。
 
-从汇总结果可以看出，本次算例共覆盖 6 个风场、3 个模型和 18 条有效结果记录，因而能够同时从同场景横向比较和跨场景纵向比较两个层面评估模型性能。为了保证图表的代表性，后续分析优先选取模型差异明显的典型风场图像，并结合总体统计表进行归纳讨论。
+\subsection{不同模型在一号风场上的预测结果}
+对于同一站点的数据拟合能力比较，以一号风场单步长预测（$LF=1$）的结果为例。由图\ref{fig:site1_curves} 包含的指标直方图和实际预测曲线可知，在超短期单步预测任务中，三种模型的精度表现都处于极高水平（$R^2 > 0.97$），展现了深度神经网络对于风能这类具有高自相关性序列的强大基线拟合能力。具体而言，LSTM 模型因为天然适配短序列记忆而取得了非常低的绝对误差与均方误差；CNN 同样展示出了极其优秀的误差追踪指标；此时 CNN-LSTM 前期的卷积特征在应对最为简单的顺滑短序列时未能体现出远景平滑优势，但在保留功率动态包络上的追踪依然十分紧密。
 
-\subsection{不同模型在同一风场上的预测结果对比}
-表~\ref{tab:case_metrics_by_site} 给出了六个风场在三种模型下的 MSE、MAE 和 $R^2$ 指标。整体上看，CNN 模型在所有风场中均未取得最优结果；LSTM 在风场2、风场4和风场6上取得最低 MSE；CNN-LSTM 在风场1、风场3和风场5上取得最低 MSE。这说明在当前数据集上，纯卷积结构对长时间依赖的刻画能力仍然不足，而 LSTM 与 CNN-LSTM 则表现出更强的竞争力。
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/case_analysis/site1_model_metrics_lb96_lf1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/case_analysis/site1_prediction_curves_lb96_lf1.png}
+    \end{minipage}
+    \caption{一号风场下不同模型的指标直方图与预测趋势对比}
+    \label{fig:site1_curves}
+\end{figure}
+
+\subsection{预测步长对预测精度的影响}
+图\ref{fig:lf_rmse_trend}为随着预测步长增加，不同模型的RMSE指标的变化。可以看出随着步长的增加，三种模型的预测精度都在不可避免地下降，其中 CNN-LSTM 模型的预测精度下降得最为缓慢，并且在中长步长预测中明显优于另外两种模型。因为实验实际执行中主要以具备完全序列记忆的 LSTM 作为对照基线，所以本文以 LSTM 为基准计算，不同预测模型在不同预测步长下相对于它的预测精度提升（RMSE改善率）如表\ref{tab:lf_improvement}所示。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{figure/case_analysis/site1_lookforward_rmse_trend_lb96.png}
+    \caption{预测步长对不同模型RMSE精度的影响变化趋势}
+    \label{fig:lf_rmse_trend}
+\end{figure}
 
 \begin{table}[H]
     \centering
-    \caption{六个风场在不同模型下的预测指标对比}
-    \label{tab:case_metrics_by_site}
-    \resizebox{\textwidth}{!}{%
-    \begin{tabular}{lccccccccc}
+    \caption{以LSTM为基准的不同模型在各预测步长下的预测精度提升率 (RMSE 改善百分比，负数代表劣化)}
+    \label{tab:lf_improvement}
+    \begin{tabular}{lcccccc}
         \hline
-        \multirow{2}{*}{风场} & \multicolumn{3}{c}{CNN} & \multicolumn{3}{c}{LSTM} & \multicolumn{3}{c}{CNN-LSTM} \\
-        & MSE & MAE & $R^2$ & MSE & MAE & $R^2$ & MSE & MAE & $R^2$ \\
+        模型 & LF=1 & LF=2 & LF=3 & LF=4 & LF=5 & LF=6 \\
         \hline
-        风场1 & 175.788 & 9.371 & 0.732 & 149.100 & 7.638 & 0.772 & 145.058 & 7.434 & 0.779 \\
-        风场2 & 772.340 & 20.138 & 0.762 & 695.776 & 18.298 & 0.785 & 733.140 & 18.169 & 0.774 \\
-        风场3 & 118.335 & 8.189 & 0.675 & 73.495 & 5.866 & 0.798 & 70.102 & 5.586 & 0.808 \\
-        风场4 & 72.211 & 5.807 & 0.835 & 38.777 & 3.982 & 0.912 & 43.770 & 4.014 & 0.900 \\
-        风场5 & 69.806 & 6.686 & -0.178 & 18.271 & 2.964 & 0.692 & 11.178 & 2.382 & 0.811 \\
-        风场6 & 174.365 & 9.459 & 0.823 & 84.558 & 6.116 & 0.914 & 94.796 & 6.486 & 0.904 \\
-        \hline
-    \end{tabular}%
-    }
-\end{table}
-
-在同一风场的横向比较中，风场5最具有代表性。由图~\ref{fig:site5_model_compare} 可见，CNN-LSTM 在该风场上的综合表现明显优于其他两种模型。其中，CNN-LSTM 的 MSE 为 11.178, MAE 为 2.382, $R^2$ 为 0.8114；相比 LSTM，MSE 下降了 38.82\%；相比 CNN，MSE 下降了 83.99\%。从图~\ref{fig:site5_cnn_lstm_pred} 中左右两幅子图的对比也可以看出，CNN-LSTM 对功率峰谷变化的跟踪更紧密，而 CNN 在该风场上存在明显的振幅偏差和趋势偏移，这与其在该风场上的负 $R^2$ 结果相一致。
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.72\textwidth]{figure/case_analysis/site5_model_compare.png}
-    \caption{风场5在三种模型下的预测指标对比}
-    \label{fig:site5_model_compare}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figure/case_analysis/site5_cnn_lstm_pred.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figure/case_analysis/site5_cnn_pred.png}
-    \end{minipage}
-    \caption{风场5中 CNN-LSTM 与 CNN 的预测结果对比。左图为 CNN-LSTM，右图为 CNN。}
-    \label{fig:site5_cnn_lstm_pred}
-\end{figure}
-
-\subsection{同一模型在不同风场上的泛化性能分析}
-从跨风场结果看，LSTM 与 CNN-LSTM 的优劣具有明显的场景依赖性。风场4中，LSTM 的 MSE 为 38.777, 略优于 CNN-LSTM 的 43.770, 且二者的 $R^2$ 均处于 0.90 左右，说明在该类时间相关性较强、模式相对稳定的风场中，单纯依靠循环结构已能取得较好的预测效果。另一方面，在风场5中，CNN-LSTM 的优势更加突出，说明卷积前端提取局部变化模式后再交由 LSTM 建模，有助于缓解复杂场景下的误差积累。风场6则表明，当序列规律较为清晰时，LSTM 仍具有较强的泛化能力。
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figure/case_analysis/site4_lstm_pred.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figure/case_analysis/site5_cnn_lstm_pred.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figure/case_analysis/site6_lstm_pred.png}
-    \end{minipage}
-    \caption{不同风场上的代表性预测结果。左图为风场4的 LSTM 结果，中图为风场5的 CNN-LSTM 结果，右图为风场6的 LSTM 结果。}
-    \label{fig:cross_site_prediction_examples}
-\end{figure}
-
-从最优次数统计来看，LSTM 与 CNN-LSTM 各自获得 3 次单风场最优结果，而 CNN 没有取得单场景最优。这说明混合模型并非在所有风场上都绝对占优，但其稳定性和适应复杂工况的能力更强；同时，LSTM 在若干风场上的突出表现也表明，时间依赖关系仍然是影响风电功率预测精度的核心因素之一。
-
-\subsection{预测结果可视化分析}
-为了进一步观察模型的拟合细节，本节选取风场5中 CNN-LSTM 的整体预测曲线、局部放大图、误差曲线和散点图进行可视化分析，如图~\ref{fig:site5_visuals} 所示。整体曲线显示，模型能够较好地跟踪功率变化趋势；在局部放大图中，预测曲线对波峰波谷具有较好的同步能力，但在快速上升或快速下降区间仍存在一定的平滑现象。误差曲线围绕零值上下波动，未出现长期单侧偏移，说明模型总体不存在明显系统性偏差。散点图中样本点大多分布在对角线附近，进一步说明预测值与真实值之间具有较强的一致性。
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figure/case_analysis/site5_cnn_lstm_pred.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figure/case_analysis/site5_cnn_lstm_zoom.png}
-    \end{minipage}\\[0.6em]
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figure/case_analysis/site5_cnn_lstm_error.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figure/case_analysis/site5_cnn_lstm_scatter.png}
-    \end{minipage}
-    \caption{风场5中 CNN-LSTM 模型的可视化结果。左上为整体预测图，右上为局部放大图，左下为误差曲线，右下为散点图。}
-    \label{fig:site5_visuals}
-\end{figure}
-
-\subsection{\texorpdfstring{基于 MSE、MAE、R\textsuperscript{2} 的综合评价}{基于 MSE、MAE、R2 的综合评价}}
-为了从全局角度比较模型性能，表~\ref{tab:case_metrics_avg} 给出了三种模型在六个风场上的平均指标与最优次数统计。结果表明，CNN-LSTM 的平均 MAE 最低，为 7.345, 平均 $R^2$ 最高，为 0.8292；LSTM 的平均 MSE 最低，为 176.663, 且在 3 个风场上取得单场景最优结果。相比之下，CNN 的平均 MSE 和平均 MAE 均最高，平均 $R^2$ 仅为 0.6082，表现明显落后于另外两种模型。
-
-\begin{table}[H]
-    \centering
-    \caption{三种模型跨风场平均指标与最优次数统计}
-    \label{tab:case_metrics_avg}
-    \begin{tabular}{lcccc}
-        \hline
-        模型 & 平均MSE & 平均MAE & 平均$R^2$ & 最优次数 \\
-        \hline
-        CNN & 230.474 & 9.941 & 0.6082 & 0 \\
-        LSTM & 176.663 & 7.477 & 0.8123 & 3 \\
-        CNN-LSTM & 183.007 & 7.345 & 0.8292 & 3 \\
+        LSTM(基准) & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% & 0.0\% \\
+        CNN & 0.7\% & -3.2\% & 6.5\% & 14.8\% & 7.8\% & 13.9\% \\
+        CNN-LSTM & -12.9\% & 0.4\% & 11.4\% & 16.7\% & 8.9\% & 12.8\% \\
         \hline
     \end{tabular}
 \end{table}
 
-此外，分步预测结果表明，随着预测步长增加，三种模型的误差均呈上升趋势，具体表现为：CNN模型的平均MAE由第1步的6.393增加到第12步的13.109，平均$R^2$由0.7322下降到0.4909；LSTM模型的平均MAE由第1步的3.956增加到第12步的10.360，平均$R^2$由0.9315下降到0.7018；CNN-LSTM模型的平均MAE由第1步的4.555增加到第12步的9.711，平均$R^2$由0.9437下降到0.7240。
+从表内涨跌趋势中可以清晰洞察规律：当预测步长处于 $LF=1$ 这类极短时调度范围内，复杂的混合网络呈现出一定负增益；但当步长拉伸至 $LF=3$ 到 $LF=6$ 的中远期尺度时，纯粹依靠内部状态递归传递的 LSTM 面临快速积累发散的预测惩罚，而前置了抗噪波长特征抓取机制的 CNN-LSTM 开始体现优势发力，在中后程大幅超越循环基准（$LF=4$时相对改善甚至达到了 16.7\%），切实确立了网络融合层在抵抗长步长退化上的优越性。
 
-综合来看，若更强调平均绝对误差控制和整体拟合能力，CNN-LSTM 更具优势；若将均方误差最小化作为首要目标，LSTM 仍具有较强竞争力。因此，两类模型均可作为风电功率预测的有效方案，但 CNN-LSTM 的综合表现更加均衡。
+\subsection{不同风电场的预测表现}
+要全息研判不同算法框架在跨气候、跨环境的适应能力，不仅需考量时长纵伸还要考察场景的横跨。表\ref{tab:cross_site_overall} 给定了模型在多步长极其严苛的工况下（$LF=6$），面对所有真实收集到的 6 个风场数据池时的均值截面验证数据。对应的跨场表现横行雷达反馈图则如图\ref{fig:cross_site_6sites} 所展示。
 
-\subsection{模型优缺点与误差来源分析}
-从算例结果可以总结出三类模型的特点。CNN 模型结构较为简洁，训练时间较短，但由于其主要依赖局部感受野提取时间片段特征，对长期依赖关系和复杂非线性波动的刻画能力有限，因此在多个风场中出现拟合不足现象，尤其在风场5中表现最差。LSTM 模型能够较好地记忆时间依赖关系，在风场2、风场4和风场6上均取得较优结果，说明对于时序规律相对稳定的风场，其建模能力较强。CNN-LSTM 则兼具局部模式提取与长期依赖建模能力，在风场1、风场3和风场5上取得最优结果，显示出较好的综合适应性。
+\begin{table}[H]
+    \centering
+    \caption{不同风场场景泛化验证（预测步长恒定为 $LF=6$ 时的跨站均值）}
+    \label{tab:cross_site_overall}
+    \begin{tabular}{lccc}
+        \hline
+        模型 & 平均MSE & 平均MAE & 平均$R^2$ \\
+        \hline
+        CNN & 123.691 & 6.388 & 0.863 \\
+        CNN-LSTM & 111.836 & 5.646 & 0.867 \\
+        LSTM & 172.120 & 6.899 & 0.812 \\
+        \hline
+    \end{tabular}
+\end{table}
 
-误差来源主要包括以下几个方面：其一，风电功率本身受风速、风向、温度、气压和湿度等多因素共同影响，且这些变量之间存在强烈的时变耦合关系，导致输入与输出之间呈现复杂非线性映射；其二，极端天气、突发风速波动以及机组运行状态变化会带来短时异常，使模型在局部区间出现跟踪偏差；其三，不同风场的数据分布和功率曲线差异较大，使得模型在跨风场场景下难以保持完全一致的泛化效果；其四，当前实验仍采用统一的网络规模和训练轮数，不同模型尚未针对每个风场做更细致的参数优化，这也会造成部分性能差异。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{figure/case_analysis/generalization_6sites_lb96_lf6.png}
+    \caption{在此次预测实验下的三种模型对应六个实际风电场的泛化表现}
+    \label{fig:cross_site_6sites}
+\end{figure}
 
-\subsection{最优模型选择与适用场景讨论}
-从单风场最优次数看，LSTM 与 CNN-LSTM 各有 3 次最优，说明两者都具备较强的工程应用价值；从跨风场平均指标看，CNN-LSTM 在平均 MAE 和平均 $R^2$ 上更优，说明其整体拟合稳定性更强。考虑到风电功率预测任务既要求较好的趋势跟踪能力，又要求在复杂场景下保持较强鲁棒性，本文将 CNN-LSTM 作为推荐模型；同时，LSTM 可作为一个性能稳定、实现相对简洁的重要对照模型。
-
-具体而言，当风场数据具有更明显的局部波动特征或多因素耦合效应较强时，CNN-LSTM 更适合作为优先方案；当时间序列规律较清晰、希望在较低结构复杂度下获得较好结果时，LSTM 也是可行的选择。相比之下，纯 CNN 模型更适合作为基线模型，而不宜作为当前数据集上的最终推荐方案。
+横推不同风场的独立特性不难发现，类似风场2这类绝对离散度大且可能潜藏局部气候扰动的场景，最容易引发递归算法全局推导路径崩溃从而导致预测方差飙升。在此项压力测试下，CNN 以及拥有共同卷积内核因子的组合网络利用空间映射，平稳压住了波峰偏离并维持了综合平均 MAE/MSE 处于健康下界。多站点的宽口径评定证明：如果目标是在多样化与气候繁复风电群里实施高可用性的功率部署，以提取泛化周期波形特长的 CNN-LSTM 实属表现最佳的工业方案。

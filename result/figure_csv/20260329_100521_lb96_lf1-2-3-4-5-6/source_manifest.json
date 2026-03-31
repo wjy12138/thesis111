@@ -1,0 +1,51 @@
+{
+  "batch_id": "20260329_100521_lb96_lf1-2-3-4-5-6",
+  "created_at": "2026-03-29T12:00:25",
+  "batch_dir": "results/date/20260329_100521_lb96_lf1-2-3-4-5-6",
+  "lookback": 96,
+  "lookforwards": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "models": [
+    "LSTM",
+    "CNN_LSTM",
+    "CNN"
+  ],
+  "analysis_site_file": "Wind farm site 1 (Nominal capacity-99MW).xlsx",
+  "site_files": [
+    "Wind farm site 1 (Nominal capacity-99MW).xlsx",
+    "Wind farm site 2 (Nominal capacity-200MW).xlsx",
+    "Wind farm site 3 (Nominal capacity-99MW).xlsx",
+    "Wind farm site 4 (Nominal capacity-66MW).xlsx",
+    "Wind farm site 5 (Nominal capacity-36MW).xlsx",
+    "Wind farm site 6 (Nominal capacity-96MW).xlsx"
+  ],
+  "checkpoint_selection": "last_epoch",
+  "use_history_target": true,
+  "results_root": "results",
+  "date_results_dir": "results/date",
+  "figure_csv_dir": "results/figure_csv",
+  "runs": {
+    "site1": {
+      "1": "site1/lb96_lf1",
+      "2": "site1/lb96_lf2",
+      "3": "site1/lb96_lf3",
+      "4": "site1/lb96_lf4",
+      "5": "site1/lb96_lf5",
+      "6": "site1/lb96_lf6"
+    },
+    "all_sites": {
+      "1": "all_sites/lb96_lf1",
+      "2": "all_sites/lb96_lf2",
+      "3": "all_sites/lb96_lf3",
+      "4": "all_sites/lb96_lf4",
+      "5": "all_sites/lb96_lf5",
+      "6": "all_sites/lb96_lf6"
+    }
+  }
+}
