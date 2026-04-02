@@ -44,9 +44,8 @@ YANG Y, LOU H, WU J, et~al.
 
 \bibitem[{徐曼}\ 等(2011){徐曼}, {乔颖}, and {鲁宗相}]{XuManDuanQiFengDianGongLuYuCeWuChaiZongHePingJieFangFa2011}
 {徐曼}, {乔颖}, {鲁宗相}.
-\newblock 短期风电功率预测误差综合评价方法\allowbreak[J/OL].
+\newblock 短期风电功率预测误差综合评价方法\allowbreak[J].
 \newblock 电力系统自动化, 2011, 35\allowbreak (12): 20-26.
-\newblock \url{https://kns.cnki.net/kcms2/article/abstract?v=tC3tAMdiXNcJ4k7ciwitE9lQAgZJxPL0ANBTgAsE_Q27c_jP_wFUGlcfowU026smF_fIsCHS1t1FtpjZTxfnSoCbOu87MAYgKyUIsjvro4mO_A5K9TrlERzohQDz_mtSOxyzQQ3ggV0j9iUYdv0T7e3gVgkhh_IbcHFyHVQNspCTSN92Im3cSA==&uniplatform=NZKPT&language=CHS}.
 
 \bibitem[Liu et~al.(2019)Liu and Chen]{liuDataProcessingStrategies2019}
 LIU H, CHEN C.
@@ -61,25 +60,19 @@ WU Z, LUO G, YANG Z, et~al.
 \newblock CAAI Transactions on Intelligence Technology, 2022, 7\allowbreak (2): 129-143\allowbreak[2026-03-13].
 \newblock \url{https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/cit2.12076}.
 
-\bibitem[Duong Hoang~Vu et~al.(2025)Duong Hoang~Vu, Phung~Mac, Tran~Ngoc, Nguyen~Dinh, and Nguyen~Tuan]{duonghoangvuMultistepWindPower2025}
-DUONG HOANG~VU L, PHUNG~MAC Q, TRAN~NGOC K, et~al.
-\newblock Multi-step wind power forecasting over 24 hours using a {{CNN-LSTM}} hybrid model\allowbreak[J/OL].
-\newblock Journal of Measurement, Control, and Automation, 2025, 29\allowbreak (4): 59-66\allowbreak[2026-03-13].
-\newblock \url{https://mca-journal.org/index.php/mca/article/view/345}.
-\newblock DOI: \doi{10.64032/mca.v29i4.345}.
-
-\bibitem[{李大中}\ 等(2021){李大中} and {李颖宇}]{LiDaZhongJiYuShenDuXueXiYuWuChaiXiuZhengDeChaoDuanQiFengDianGongLuYuCe2021}
-{李大中}, {李颖宇}.
-\newblock 基于深度学习与误差修正的超短期风电功率预测\allowbreak[J/OL].
-\newblock 太阳能学报, 2021, 42\allowbreak (12): 200-205.
-\newblock \url{https://link.cnki.net/doi/10.19912/j.0254-0096.tynxb.2019-1464}.
-
 \bibitem[Zhang et~al.(2019)Zhang, Yan, Infield, Liu, and Lien]{zhangShorttermForecastingUncertainty2019}
 ZHANG J, YAN J, INFIELD D, et~al.
 \newblock Short-term forecasting and uncertainty analysis of wind turbine power based on long short-term memory network and {{Gaussian}} mixture model\allowbreak[J/OL].
 \newblock Applied Energy, 2019, 241: 229-244\allowbreak[2026-03-04].
 \newblock \url{https://linkinghub.elsevier.com/retrieve/pii/S0306261919304532}.
 \newblock DOI: \doi{10.1016/j.apenergy.2019.03.044}.
+
+\bibitem[Duong Hoang~Vu et~al.(2025)Duong Hoang~Vu, Phung~Mac, Tran~Ngoc, Nguyen~Dinh, and Nguyen~Tuan]{duonghoangvuMultistepWindPower2025}
+DUONG HOANG~VU L, PHUNG~MAC Q, TRAN~NGOC K, et~al.
+\newblock Multi-step wind power forecasting over 24 hours using a {{CNN-LSTM}} hybrid model\allowbreak[J/OL].
+\newblock Journal of Measurement, Control, and Automation, 2025, 29\allowbreak (4): 59-66\allowbreak[2026-03-13].
+\newblock \url{https://mca-journal.org/index.php/mca/article/view/345}.
+\newblock DOI: \doi{10.64032/mca.v29i4.345}.
 
 \bibitem[Yuan et~al.(2019)Yuan, Chen, Jiang, and Yuan]{yuanPredictionIntervalWind2019}
 YUAN X, CHEN C, JIANG M, et~al.
@@ -107,5 +100,11 @@ HE X, MA Y, XIE J, et~al.
 \newblock 基于长短期记忆网络的风电场发电功率超短期预测\allowbreak[J/OL].
 \newblock 电网技术, 2017, 41\allowbreak (12): 3797-3802.
 \newblock \url{https://link.cnki.net/doi/10.13335/j.1000-3673.pst.2017.1657}.
+
+\bibitem[{李大中}\ 等(2021){李大中} and {李颖宇}]{LiDaZhongJiYuShenDuXueXiYuWuChaiXiuZhengDeChaoDuanQiFengDianGongLuYuCe2021}
+{李大中}, {李颖宇}.
+\newblock 基于深度学习与误差修正的超短期风电功率预测\allowbreak[J/OL].
+\newblock 太阳能学报, 2021, 42\allowbreak (12): 200-205.
+\newblock \url{https://link.cnki.net/doi/10.19912/j.0254-0096.tynxb.2019-1464}.
 
 \end{thebibliography}

@@ -65,25 +65,29 @@ LSTM门控机制包含三个部分，即遗忘门、输入门和输出门。
 \begin{equation}
     f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
 \end{equation}
-其中，$\sigma(\cdot)$ 表示Sigmoid激活函数，$\cdot$ 表示向量点积，$[h_{t-1}, x_t]$ 表示将前一时刻的隐藏状态和当前时刻的输入拼接起来，$W_f$ 和 $b_f$ 分别表示遗忘门的权重矩阵和偏置项。接着是输入门，决定从当前输入中保留哪些信息。如图~\ref{fig:lstm_struct_input}所示，输入门由两部分组成，一部分是Sigmoid激活函数，另一部分是tanh激活函数，其公式表示为
+其中，$\sigma(\cdot)$ 表示Sigmoid激活函数，$\cdot$ 表示矩阵乘法，$[h_{t-1}, x_t]$ 表示将前一时刻的隐藏状态和当前时刻的输入拼接起来，$W_f$ 和 $b_f$ 分别表示遗忘门的权重矩阵和偏置项。接着是输入门，决定从当前输入中保留哪些信息。如图~\ref{fig:lstm_struct_input}所示，输入门由两部分组成，一部分是Sigmoid激活函数，另一部分是tanh激活函数，其公式表示为
 \begin{equation}
-    i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
-    \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+    \begin{aligned}
+        i_t &= \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\
+        \tilde{C}_t &= \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+    \end{aligned}
 \end{equation}
-其中，$\sigma(\cdot)$ 表示Sigmoid激活函数，$\cdot$ 表示向量点积，$[h_{t-1}, x_t]$ 表示将前一时刻的隐藏状态和当前时刻的输入拼接起来，$W_i$ 和 $b_i$ 分别表示输入门的权重矩阵和偏置项，$\tilde{C}_t$ 表示候选细胞状态。
+其中，$\sigma(\cdot)$ 表示Sigmoid激活函数，$\cdot$ 表示矩阵乘法，$[h_{t-1}, x_t]$ 表示将前一时刻的隐藏状态和当前时刻的输入拼接起来，$W_i$ 和 $b_i$ 分别表示输入门的权重矩阵和偏置项，$\tilde{C}_t$ 表示候选细胞状态。
 
 细胞状态的更新过程如图~\ref{fig:lstm_struct_cell}所示，公式为
 \begin{equation}
     C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t
 \end{equation}
-其中，$C_t$ 表示当前时刻的细胞状态，$C_{t-1}$ 表示前一时刻的细胞状态，$f_t$ 表示遗忘门，$i_t$ 表示输入门，$\tilde{C}_t$ 表示候选细胞状态，$\odot$ 表示向量点积。
+其中，$C_t$ 表示当前时刻的细胞状态，$C_{t-1}$ 表示前一时刻的细胞状态，$f_t$ 表示遗忘门，$i_t$ 表示输入门，$\tilde{C}_t$ 表示候选细胞状态，$\odot$ 表示逐元素乘法（Hadamard积）。
 
 输出门决定从细胞状态中输出哪些信息，其公式表示为
 \begin{equation}
-    o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
-    h_t = o_t \odot \tanh(C_t)
+    \begin{aligned}
+        o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\
+        h_t &= o_t \odot \tanh(C_t)
+    \end{aligned}
 \end{equation}
-其中，$\sigma(\cdot)$ 表示Sigmoid激活函数，$\cdot$ 表示向量点积，$[h_{t-1}, x_t]$ 表示将前一时刻的隐藏状态和当前时刻的输入拼接起来，$W_o$ 和 $b_o$ 分别表示输出门的权重矩阵和偏置项，$\odot$ 表示向量点积，$\tanh(\cdot)$ 表示tanh激活函数。
+其中，$\sigma(\cdot)$ 表示Sigmoid激活函数，$\cdot$ 表示矩阵乘法，$[h_{t-1}, x_t]$ 表示将前一时刻的隐藏状态和当前时刻的输入拼接起来，$W_o$ 和 $b_o$ 分别表示输出门的权重矩阵和偏置项，$\odot$ 表示逐元素乘法（Hadamard积），$\tanh(\cdot)$ 表示tanh激活函数。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.88\textwidth]{figure/lstm_struct_forget.png}
@@ -104,7 +108,23 @@ LSTM门控机制包含三个部分，即遗忘门、输入门和输出门。
 \end{figure}
 
 \subsection{CNN-LSTM混合模型原理}
-经过预处理后，卷积神经网络负责提取时间序列中的局部特征。一维卷积神经网络在时间序列特征提取上表现良好，其卷积核沿固定方向滑动，提取时间维度上的特征。接着长短期记忆网络将卷积神经网络提取的特征作为输入，对特征进行处理，提取时间序列中的长期依赖关系。CNN-LSTM的流程如图~\ref{fig:cnn_lstm_structure}所示。
+CNN-LSTM混合模型将卷积网络的局部特征提取能力与LSTM的时序建模能力结合起来，适用于既存在短时波动模式、又具有长期依赖关系的风电功率序列。本文实际实现的CNN-LSTM结构与图~\ref{fig:cnn_lstm_structure} 的总体流程一致：先由CNN前端从输入窗口中提取局部时序特征，再将得到的高层特征序列输入LSTM，最后通过线性层直接输出未来多个时刻的预测功率。
+
+设输入样本为 $\mathbf{X}\in\mathbb{R}^{B\times T\times d}$，其中 $B$ 为批量大小，$T=96$ 为输入时间步长度，$d$ 为特征维数。模型首先将输入张量重排为 $\mathbb{R}^{B\times d\times T}$，依次通过3个一维卷积层提取局部模式，卷积通道数分别为16、32和64，卷积核大小均为3。卷积后的特征再经过大小为2的最大池化层，压缩时间维度并保留主要响应，得到特征张量
+\[
+\mathbf{F}\in\mathbb{R}^{B\times 64\times 48}.
+\]
+随后，将张量重新排列为
+\[
+\mathbf{F}'\in\mathbb{R}^{B\times 48\times 64},
+\]
+使其满足LSTM按“时间步$\times$特征维度”接收输入的格式。从结构理解上看，这一步对应图中卷积模块与LSTM模块之间的特征序列整理过程；在本文代码实现中，是通过张量维度变换直接完成的，并未单独设置RepeatVector层。
+
+在得到 $\mathbf{F}'$ 后，模型使用2层LSTM对压缩后的特征序列进行时序建模，每层隐藏单元数为64，Dropout为0.2。LSTM输出序列中最后一个时间步的隐藏状态作为全局时序表示，并送入全连接层，直接映射为未来LF步的预测结果：
+\[
+\hat{\mathbf{y}}\in\mathbb{R}^{B\times LF}.
+\]
+与单一CNN相比，该结构不仅保留了局部波动模式，还进一步建模了卷积特征之间的时序依赖；与单一LSTM相比，CNN前端能够先行提取更具判别性的高层特征，从而减轻后续循环网络直接处理原始多变量序列的负担。因此，CNN-LSTM在中长预测步长下通常能够获得更好的综合表现。
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.88\textwidth]{figure/cnn_lstm_structure.png}
@@ -144,101 +164,36 @@ R^2 = 1-\frac{\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}{\sum_{i=1}^{n}(y_i-\bar{y})^2}
 本文的实验环境为Linux服务器，操作系统为Ubuntu 20.04，深度学习框架为PyTorch 1.13.1，编程语言为Python 3.12，处理器为Intel Xeon E5-2680 v4 @ 2.40GHz，显卡为NVIDIA GeForce RTX 3090，内存为128GB。
 
 \subsection{模型网络结构与超参数配置}
-本文将经过处理后的数据分别输入三种神经网络模型进行训练，然后取验证集上表现最优的模型对测试集进行预测。三种模型的超参数配置分别如表~\ref{tab:cnn_hyperparameters}、表~\ref{tab:lstm_hyperparameters}和表~\ref{tab:cnn_lstm_hyperparameters}所示。
+本文将经过处理后的数据分别输入三种神经网络模型进行训练，并利用验证集损失监控模型收敛情况。结合实际代码实现，实验固定输入窗口长度为96，预测步长LF根据任务分别取1至6；训练阶段统一采用批次大小64、学习率0.001、训练轮数20以及Adam优化器，最终使用第20轮的模型参数在测试集上进行评估。三种模型的网络结构与超参数配置汇总如表~\ref{tab:model_hyperparameters_summary}所示。
+
+\begin{table}[htbp]
+    \centering
+    \caption{CNN、LSTM与CNN-LSTM模型超参数汇总}
+    \label{tab:model_hyperparameters_summary}
+    \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+        \toprule
+        超参数 / 结构 & CNN & LSTM & CNN-LSTM \\ \midrule
+        输入维度 & (96, 特征数) & (96, 特征数) & (96, 特征数) \\
+        输出维度 & LF（本文实验分别取1至6） & LF（本文实验分别取1至6） & LF（本文实验分别取1至6） \\
+        卷积层1 & 16个卷积核，卷积核大小为3 & -- & 16个卷积核，卷积核大小为3 \\
+        卷积层2 & 32个卷积核，卷积核大小为3 & -- & 32个卷积核，卷积核大小为3 \\
+        卷积层3 & 64个卷积核，卷积核大小为3 & -- & 64个卷积核，卷积核大小为3 \\
+        池化层 & 最大池化，池化窗口大小为2 & -- & 最大池化，池化窗口大小为2 \\
+        全连接输出层 & 线性层直接输出LF维预测结果 & 线性层直接输出LF维预测结果 & 线性层直接输出LF维预测结果 \\
+        LSTM层 & -- & 64个隐藏单元，2层 & 64个隐藏单元，2层 \\
+        dropout & -- & 0.2 & 0.2 \\
+        学习率 & 0.001 & 0.001 & 0.001 \\
+        batch size & 64 & 64 & 64 \\
+        epoch & 20 & 20 & 20 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
 
 \subsubsection{CNN预测模型构建}
-CNN的超参数配置如表~\ref{tab:cnn_hyperparameters}所示。
-\begin{table}[htbp]
-    \centering
-    \caption{CNN超参数配置}
-    \label{tab:cnn_hyperparameters}
-    \begin{tabular}{|l|l|}
-    \hline
-    \multicolumn{2}{|l|}{CNN超参数配置} \\
-    \hline
-    超参数 & 配置 \\
-    \hline
-    输入维度 & (96, 特征数) \\
-    \hline
-    输出维度 & 12 \\
-    \hline
-    卷积层 & 32个卷积核，卷积核大小为3 \\
-    \hline
-    池化层 & 最大池化，池化窗口大小为2 \\
-    \hline
-    全连接层 & 128个神经元 \\
-    \hline
-    dropout & 0.4 \\
-    \hline
-    学习率 & 0.001 \\
-    \hline
-    batch size & 64 \\
-    \hline
-    epoch & 10 \\
-    \hline
-    \end{tabular}
-\end{table}
+CNN模型采用三层一维卷积结构，卷积通道数依次为16、32和64，卷积核大小均为3，并在卷积特征提取后通过最大池化层和线性输出层完成多步预测。
 
 \subsubsection{LSTM预测模型构建}
-LSTM的超参数配置如表~\ref{tab:lstm_hyperparameters}所示。
-\begin{table}[htbp]
-    \centering
-    \caption{LSTM超参数配置}
-    \label{tab:lstm_hyperparameters}
-    \begin{tabular}{|l|l|}
-    \hline
-    \multicolumn{2}{|l|}{LSTM超参数配置} \\
-    \hline
-    超参数 & 配置 \\
-    \hline
-    输入维度 & (96, 特征数) \\
-    \hline
-    输出维度 & 12 \\
-    \hline
-    隐藏层 & 128个隐藏单元，4层 \\
-    \hline
-    dropout & 0.4 \\
-    \hline
-    学习率 & 0.001 \\
-    \hline
-    batch size & 64 \\
-    \hline
-    epoch & 10 \\
-    \hline
-    \end{tabular}
-\end{table}
+LSTM模型采用两层堆叠结构，每层隐藏单元数为64，并设置Dropout为0.2，以增强模型对时间序列长期依赖特征的提取能力并缓解过拟合。
 
 \subsubsection{CNN-LSTM混合模型构建}
-CNN-LSTM的超参数配置如表~\ref{tab:cnn_lstm_hyperparameters}所示。
-\begin{table}[htbp]
-    \centering
-    \caption{CNN-LSTM超参数配置}
-    \label{tab:cnn_lstm_hyperparameters}
-    \begin{tabular}{|l|l|}
-    \hline
-    \multicolumn{2}{|l|}{CNN-LSTM超参数配置} \\
-    \hline
-    超参数 & 配置 \\
-    \hline
-    输入维度 & (96, 特征数) \\
-    \hline
-    输出维度 & 12 \\
-    \hline
-    卷积层1 & 32个卷积核，卷积核大小为3 \\
-    \hline
-    卷积层2 & 64个卷积核，卷积核大小为3 \\
-    \hline
-    池化层 & 最大池化，池化窗口大小为2 \\
-    \hline
-    LSTM层 & 128个隐藏单元，4层 \\
-    \hline
-    dropout & 0.4 \\
-    \hline
-    学习率 & 0.001 \\
-    \hline
-    batch size & 64 \\
-    \hline
-    epoch & 10 \\
-    \hline
-    \end{tabular}
-\end{table}
+CNN-LSTM模型以前端卷积层提取局部时序特征，再接入两层LSTM进行序列建模，兼顾局部模式识别能力与长期依赖建模能力。

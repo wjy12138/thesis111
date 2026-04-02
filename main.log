@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.11.11)  2 APR 2026 16:23
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.11.11)  2 APR 2026 20:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1009,7 +1009,7 @@ Package fontspec Info:
 (fontspec)             <->"FangSong/OT:script=hani;language=dflt;embolden=2.5;"
 
 
-Overfull \hbox (4.29619pt too wide) in paragraph at lines 19--29
+Overfull \hbox (4.29619pt too wide) in paragraph at lines 19--30
  [][] 
  []
 
@@ -1035,43 +1035,46 @@ File: figure/《图4-六个风场风速功率散点图》.eps Graphic file (type
 [8]
 File: figure/slide window.png Graphic file (type bmp)
 <figure/slide window.png>
-)
 
-[9] (./chapters/chap03.tex
+
+[9])
+
+[10] (./chapters/chap03.tex
 File: figure/1Dcnn struct .png Graphic file (type bmp)
 <figure/1Dcnn struct .png>
 
 
-[10
+[11
 
 
 ]
 
-[11]
+[12]
 File: figure/lstm_struct.png Graphic file (type bmp)
 <figure/lstm_struct.png>
 
 
-[12]
+[13]
 File: figure/lstm_struct_forget.png Graphic file (type bmp)
 <figure/lstm_struct_forget.png>
 File: figure/lstm_struct_input.png Graphic file (type bmp)
 <figure/lstm_struct_input.png>
 File: figure/lstm_struct_cell.png Graphic file (type bmp)
 <figure/lstm_struct_cell.png>
+
+
+[14]
 File: figure/cnn_lstm_structure.png Graphic file (type bmp)
 <figure/cnn_lstm_structure.png>
 
 
-[13]
-
-[14])
-
 [15]
 
-[16] (./chapters/chap04.tex
+[16])
 
-[17
+[17] (./chapters/chap04.tex
+
+[18
 
 
 ]
@@ -1079,34 +1082,34 @@ File: figure/case_analysis/site1_prediction_zoom96_lb96_lf1.png Graphic file (ty
 <figure/case_analysis/site1_prediction_zoom96_lb96_lf1.png>
 
 
-[18]
+[19]
 File: figure/case_analysis/site1_model_metrics_lb96_lf4.png Graphic file (type bmp)
 <figure/case_analysis/site1_model_metrics_lb96_lf4.png>
 File: figure/case_analysis/site1_lookforward_rmse_trend_lb96.png Graphic file (type bmp)
 <figure/case_analysis/site1_lookforward_rmse_trend_lb96.png>
 
 
-[19]
+[20]
 File: figure/case_analysis/train_time_lb96_multi_lf.png Graphic file (type bmp)
 <figure/case_analysis/train_time_lb96_multi_lf.png>
 
 
-[20])
+[21])
 
-[21] (./chapters/chap05.tex) (./main.bbl
+[22] (./chapters/chap05.tex) (./main.bbl
 
-[22
+[23
 
 
 ]
 
-[23]
+[24]
 
-[24
+[25
 
 ])
 
-[25] (./main.aux)
+[26] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/07/14>
@@ -1115,12 +1118,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 0DD81DC1DC9812ADECC1ACF66F45EFA4;5644.
  ) 
 Here is how much of TeX's memory you used:
- 23171 strings out of 473831
- 489172 string characters out of 5733136
- 1078286 words of memory out of 5000000
- 45844 multiletter control sequences out of 15000+600000
+ 23173 strings out of 473831
+ 489244 string characters out of 5733136
+ 1078214 words of memory out of 5000000
+ 45846 multiletter control sequences out of 15000+600000
  564225 words of font info for 138 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  107i,13n,125p,1231b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (31 pages).
+Output written on main.pdf (32 pages).

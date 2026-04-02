@@ -431,10 +431,10 @@
 
 % --- 设置表格全局格式 (表标题 + 表内容) ---
 
-% 1. 设置表标题格式：五号、中文黑体、英文 Times New Roman
+% 1. 设置表标题格式：五号、中文宋体、英文 Times New Roman
 % \DeclareCaptionFont 定义一个新字体命令 \tablecapfont
-% 逻辑：\zihao{5}设置字号 -> \heiti设置中文为黑体 -> \rmfamily强制英文回退到衬线体(即TNR)
-\DeclareCaptionFont{tablecapfont}{\zihao{5}\heiti\rmfamily}
+% 逻辑：\zihao{5}设置字号 -> \songti设置中文为宋体 -> \rmfamily强制英文回退到衬线体(即TNR)
+\DeclareCaptionFont{tablecapfont}{\zihao{5}\songti\rmfamily}
 % 表格编号跟随章节 (效果：表 1.1, 表 1.2)
 \numberwithin{table}{section}
 % 应用到所有表格 (table) 的标题
@@ -445,11 +445,11 @@
 }
 \setlength{\heavyrulewidth}{0.75pt} % 顶线和底线
 \setlength{\lightrulewidth}{0.5pt}  % 中间线
-% 2. 设置表格内容格式：五号、中文黑体、英文 Times New Roman
+% 2. 设置表格内容格式：五号、中文宋体、英文 Times New Roman
 % 使用 etoolbox 的 \AtBeginEnvironment 钩子
 % 每当遇到 \begin{tabular} 时，自动执行后面的字体命令
-\AtBeginEnvironment{tabular}{\zihao{5}\heiti\rmfamily}
-\AtBeginEnvironment{tabularx}{\zihao{5}\heiti\rmfamily}
+\AtBeginEnvironment{tabular}{\zihao{5}\songti\rmfamily}
+\AtBeginEnvironment{tabularx}{\zihao{5}\songti\rmfamily}
 
 
 %% --- 设置图片标题格式 ---
@@ -461,12 +461,12 @@
 \numberwithin{figure}{section}
 
 % 2. 设置图片标题格式
-% 复用之前定义的 tablecapfont (五号、黑体、英文TNR)
+% 复用之前定义的 tablecapfont (五号、宋体、英文TNR)
 % 如果你之前没定义过 tablecapfont，请先补充定义：
-% \DeclareCaptionFont{tablecapfont}{\zihao{5}\heiti\rmfamily}
+% \DeclareCaptionFont{tablecapfont}{\zihao{5}\songti\rmfamily}
 
 \captionsetup[figure]{
-    font=tablecapfont, % 使用五号黑体
+    font=tablecapfont, % 使用五号字体
     labelsep=space,    % 序号后空一格 (图1.1 标题)
     skip=0pt,          % 图片和标题之间的距离
     position=bottom    % 标题通常在下方
