@@ -1,17 +1,143 @@
-% 第4章 单一深度学习模型的风电功率预测建模
-\section{单一深度学习模型的风电功率预测建模}
+% 第6章 算例分析
+\section{算例分析}
 
-\subsection{CNN预测模型构建}
-写网络结构、输入输出维度、参数设置、优缺点。
+本章利用第2章介绍的六个实际风电场运行数据，对CNN、LSTM和CNN-LSTM三种模型的超短期风电功率预测性能进行测试与对比分析。分析内容包括：实验参数设置、典型风电场的预测结果对比、预测步长对模型精度的影响、多风场的泛化能力验证，以及模型计算效率评估。
 
-\subsection{LSTM预测模型构建}
-写网络层数、隐藏单元数、预测流程。
+\subsection{实验方案与参数设置}
+六个风电场的数据均按时间顺序切分为三部分：前70\%的数据用于训练模型，随后15\%用于验证集（用于在训练过程中调整参数、防止过拟合），最后15\%作为测试集评估最终预测性能。各风电场数据集划分的具体数量如表~\ref{tab:dataset_split} 所示。
 
-\subsection{GRU预测模型构建}
-写其轻量化优势和实现过程。
+\begin{table}[H]
+    \centering
+    \caption{六个风电场数据集划分统计表}
+    \label{tab:dataset_split}
+    \begin{tabular}{lcccc}
+        \hline
+        数据集名称 & 总样本数 & 训练集（70\%） & 验证集（15\%） & 测试集（15\%） \\
+        \hline
+        风场1 (99MW) & 70,080 & 49,056 & 10,512 & 10,512 \\
+        风场2 (200MW)& 70,080 & 49,056 & 10,512 & 10,512 \\
+        风场3 (99MW) & 70,080 & 49,056 & 10,512 & 10,512 \\
+        风场4 (66MW) & 70,080 & 49,056 & 10,512 & 10,512 \\
+        风场5 (36MW) & 69,900 & 48,930 & 10,485 & 10,485 \\
+        风场6 (96MW) & 70,050 & 49,035 & 10,507 & 10,508 \\
+        \hline
+    \end{tabular}
+\end{table}
 
-\subsection{三种单模型训练流程设计}
-写统一的数据输入方式、训练流程图、停止准则。
+实验中，模型每次输入过去96个时间步（即过去24小时）的历史数据，输出未来1至6步（即未来15分钟至1.5小时）的预测功率。三种模型均采用均方误差（MSE）作为损失函数，使用Adam优化器进行训练。各模型统一使用相同的超参数配置：隐藏层维度为64，网络层数为2层，批次大小为64，学习率为0.001，最大训练轮数为20轮，Dropout概率为0.2。
 
-\subsection{单模型初步实验结果分析}
-简单给出部分结果，为后续综合对比做铺垫。
+\subsection{典型风电场预测结果对比分析}
+以一号风场（额定容量99 MW）为典型案例，表~\ref{tab:site1_full_metrics} 给出了三种模型在不同预测步长（LF=1至LF=6）下的误差指标，包括均方误差（MSE）、均方根误差（RMSE）、平均绝对误差（MAE）和决定系数（$R^2$）。
+
+\begin{table}[H]
+    \centering
+    \caption{一号风场不同预测步长下各模型误差指标对比}
+    \label{tab:site1_full_metrics}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{llcccc}
+        \hline
+        预测步长 & 模型 & MSE & RMSE & MAE & $R^2$ \\
+        \hline
+        \multirow{3}{*}{LF=1 (15分钟)}
+        & LSTM     & 15.08 & 3.88 & 2.23 & 0.977 \\
+        & CNN      & 14.86 & 3.86 & 2.28 & 0.977 \\
+        & CNN-LSTM & 19.23 & 4.39 & 2.55 & 0.971 \\
+        \hline
+        \multirow{3}{*}{LF=2 (30分钟)}
+        & LSTM     & 32.71 & 5.72 & 3.32 & 0.950 \\
+        & CNN      & 34.85 & 5.90 & 3.57 & 0.947 \\
+        & CNN-LSTM & 32.46 & 5.70 & 3.39 & 0.950 \\
+        \hline
+        \multirow{3}{*}{LF=3 (45分钟)}
+        & LSTM     & 59.80 & 7.73 & 4.36 & 0.909 \\
+        & CNN      & 52.32 & 7.23 & 4.43 & 0.920 \\
+        & CNN-LSTM & 46.94 & 6.85 & 3.91 & 0.928 \\
+        \hline
+        \multirow{3}{*}{LF=4 (60分钟)}
+        & LSTM     & 97.74 & 9.89 & 5.66 & 0.851 \\
+        & CNN      & 70.98 & 8.43 & 5.23 & 0.892 \\
+        & CNN-LSTM & 67.85 & 8.24 & 4.94 & 0.896 \\
+        \hline
+        \multirow{3}{*}{LF=5 (75分钟)}
+        & LSTM     & 114.14 & 10.68 & 6.14 & 0.826 \\
+        & CNN      &  97.06 &  9.85 & 6.47 & 0.852 \\
+        & CNN-LSTM &  94.79 &  9.74 & 5.72 & 0.855 \\
+        \hline
+        \multirow{3}{*}{LF=6 (90分钟)}
+        & LSTM     & 154.73 & 12.44 & 7.34 & 0.764 \\
+        & CNN      & 114.61 & 10.71 & 7.08 & 0.825 \\
+        & CNN-LSTM & 117.73 & 10.85 & 6.52 & 0.820 \\
+        \hline
+    \end{tabular}%
+    }
+\end{table}
+
+由表~\ref{tab:site1_full_metrics} 可以看出：在最短15分钟预测（LF=1）时，三种模型的差距很小，LSTM和CNN的$R^2$均达到0.977，CNN-LSTM为0.971，三者精度相当。但随着预测时间延长，各模型的差距逐渐拉大。在预测60分钟（LF=4）时，LSTM的MSE为97.74，而CNN-LSTM的MSE为67.85，比LSTM低约30.6\%，优势较为明显。这是因为LSTM在进行多步预测时，每一步的预测误差会传递到下一步并逐步累积，导致预测时间越长误差越大；而CNN-LSTM通过卷积层先对输入数据进行特征提取，能够更有效地捕捉功率变化的规律，从而在较长时间预测时保持更好的精度。
+
+图~\ref{fig:site1_zoom_lf1} 展示了一号风场在15分钟预测（LF=1）下的预测曲线局部放大图，可以直观地看到三种模型的预测值与真实值的贴合程度。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure/case_analysis/site1_prediction_zoom96_lb96_lf1.png}
+    \caption{一号风场单步预测（LF=1）测试集局部放大对比图}
+    \label{fig:site1_zoom_lf1}
+\end{figure}
+
+图~\ref{fig:site1_bar_lf4} 为60分钟预测（LF=4）时三种模型各误差指标的柱状图对比。从图中可以看出，在预测时间较长时，CNN-LSTM的MSE和MAE均优于LSTM，体现出混合模型在较长时间预测中的优势。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figure/case_analysis/site1_model_metrics_lb96_lf4.png}
+    \caption{一号风场60分钟预测（LF=4）时三种模型误差指标对比}
+    \label{fig:site1_bar_lf4}
+\end{figure}
+
+\subsection{预测步长对模型精度的影响分析}
+为了更清晰地展示随预测步长增加时各模型精度的变化规律，图~\ref{fig:site1_rmse_trend} 绘制了RMSE随预测步长从LF=1增加到LF=6的变化曲线。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figure/case_analysis/site1_lookforward_rmse_trend_lb96.png}
+    \caption{一号风场不同预测步长（LF=1$\sim$6）下各模型RMSE变化趋势}
+    \label{fig:site1_rmse_trend}
+\end{figure}
+
+由图~\ref{fig:site1_rmse_trend} 可以看出，在LF=1和LF=2阶段，三种模型的RMSE相差不大。当预测步长超过LF=2（即超过30分钟）后，LSTM的误差增长最快，到LF=6时RMSE已达12.44；CNN和CNN-LSTM的误差增长相对平缓，在LF=3至LF=5区间，CNN-LSTM的RMSE始终低于另外两种模型，说明其在预测时间较长的场景下具有更强的稳定性。
+
+\subsection{多风场泛化能力验证}
+为验证三种模型在不同风电场上的适用性，本节将模型分别在全部六个风电场上进行测试。表~\ref{tab:cross_site_lf1_metrics} 给出了单步预测（LF=1）下六个风电场的MSE和$R^2$。
+
+\begin{table}[H]
+    \centering
+    \caption{六个风电场单步预测（LF=1）指标对比}
+    \label{tab:cross_site_lf1_metrics}
+    \begin{tabular}{lcccccc}
+        \hline
+        \multirow{2}{*}{风场} & \multicolumn{2}{c}{CNN} & \multicolumn{2}{c}{LSTM} & \multicolumn{2}{c}{CNN-LSTM} \\
+        & MSE & $R^2$ & MSE & $R^2$ & MSE & $R^2$ \\
+        \hline
+        风场1 (99MW) & 14.86 & 0.977 & 15.08 & 0.977 & 19.23 & 0.971 \\
+        风场2 (200MW)& 54.25 & 0.983 & 51.40 & 0.984 & 54.44 & 0.983 \\
+        风场3 (99MW) &  9.06 & 0.975 &  8.44 & 0.977 &  9.24 & 0.975 \\
+        风场4 (66MW) &  4.02 & 0.991 &  3.62 & 0.992 &  4.63 & 0.989 \\
+        风场5 (36MW) &  1.25 & 0.979 &  0.99 & 0.983 &  1.10 & 0.981 \\
+        风场6 (96MW) & 12.05 & 0.988 & 11.99 & 0.988 & 14.03 & 0.986 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+从表~\ref{tab:cross_site_lf1_metrics} 可以看出，三种模型在全部六个风电场的单步预测中$R^2$均达到0.97以上，说明所构建的模型在不同规模和地理条件的风电场上均具有较好的预测性能。在单步预测场景下，LSTM在大部分风电场上略优于CNN和CNN-LSTM；而在较长步长（LF=6）的预测中，CNN-LSTM的平均误差低于LSTM，说明混合模型在短时预测精度接近的情况下，对较长时间的预测更为稳健。
+
+\subsection{计算效率分析}
+除预测精度外，模型的训练速度也是实际工程应用中的重要考量因素。图~\ref{fig:train_time_bars} 给出了三种模型在六个风电场上的平均训练时间对比。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figure/case_analysis/train_time_lb96_multi_lf.png}
+    \caption{三种模型在不同预测步长下的训练时间对比}
+    \label{fig:train_time_bars}
+\end{figure}
+
+由图~\ref{fig:train_time_bars} 可知，CNN的训练时间最短，平均约为41$\sim$42秒；LSTM平均约需48$\sim$49秒；CNN-LSTM由于网络结构更复杂（包含卷积层和LSTM层），训练时间最长，平均约为64$\sim$66秒，比CNN多出约50\%。
+
+需要指出的是，上述训练时间是一次离线训练所需的总时间，在实际工程部署时，模型通常只需周期性地重新训练一次（如每天或每周更新一次），而非实时训练。因此，CNN-LSTM额外多出的约20秒训练时间对整体运行影响有限。在线预测时，三种模型的单次推理时间均在毫秒级别，可以满足超短期功率预测15分钟滚动更新的实时性要求。综合来看，CNN-LSTM以略高的训练时间代价，换取了在较长预测步长下更好的预测精度，具有较好的工程实用价值。

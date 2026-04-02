@@ -4,9 +4,9 @@
 \subsection{数据来源与数据集介绍}
 
 \begin{sloppypar}
-本研究采用的风电场数据来源于公开数据集 \url{Renewable-energy-generation-input-feature-variables-analysis}，可通过 \url{https://github.com/Bob05757/Renewable-energy-generation-input-feature-variables-analysis} 获取。该数据集来自国家电网2021年举办的新能源发电预测竞赛，关于该数据集的数据说明可以从SCIENCE上的数据论文获取。
+本研究采用的风电场数据来源于公开数据集 \url{Renewable-energy-generation-input-feature-variables-analysis}，可通过 \url{https://github.com/Bob05757/Renewable-energy-generation-input-feature-variables-analysis} 获取。该数据集来自国家电网2021年举办的新能源发电预测竞赛，关于该数据集的数据说明可以从SCIENCE上的相关数据说明文章获取。
 
-该数据集中风电数据来自中国六个风电场，数据由SCADA系统采集，时间分辨率为15分钟，从2019-2020年两年。每个风电场数据文件均记录了功率和气象变量，包括不同高度的风速，温度，湿度，气压、风向等共11项特征数据以及总功率输出，该数据论文指出轮毂高度风速是最重要变量之一。风电场分布在中国国北部，中部和西北部地形位置包括沙漠、山地、和平原。
+该数据集中风电数据来自中国六个风电场，数据由SCADA系统采集，时间分辨率为15分钟，从2019-2020年两年。每个风电场数据文件均记录了功率和气象变量，包括不同高度的风速，温度，湿度，气压、风向等共11项特征数据以及总功率输出。相关数据说明文章指出轮毂高度风速是最重要变量之一。风电场分布在中国国北部，中部和西北部地形位置包括沙漠、山地、和平原。
 
 各风电场数据集的结构基本一致，都包含采样时间以及12个气象和运行特征，其中时间字段为 \texttt{Time(year-month-day h:m:s)}，用于表征样本采集时刻；气象特征主要包括 10\,m、30\,m 和 50\,m 高度处的风速与风向，轮毂高度处的风速与风向，以及空气温度、气压和相对湿度等变量。具体而言，输入特征字段共 12 个，分别为：Wind speed at height of 10 meters (m/s)、Wind direction at height of 10 meters (˚)、Wind speed at height of 30 meters (m/s)、Wind direction at height of 30 meters (˚)、Wind speed at height of 50 meters (m/s)、Wind direction at height of 50 meters (˚)、Wind speed at the height of wheel hub (m/s)、Wind speed at the height of wheel hub (˚)、Air temperature (°C)、Atmosphere (hpa)、Relative humidity (\%)，以及时间信息所隐含的时序变化特征。目标变量为 Power (MW)，表示对应时刻风电场的实际输出功率。表~\ref{tab:wind_farm_features} 描述了各个列标题的含义和缩写，后续可视化为了方便将采取缩写形式。
 
@@ -93,7 +93,7 @@
 
 
 \subsection{数据可视化和特征相关性分析}
-输入特征的选择对提高预测精读至关重要，而相关性分析对于变量的选取具有重要意义。本文采用皮尔逊相关系数（The Pearson correlation coefficient,PCC）来分析各输入特征与输出变量之间的相关性，并结合热力图进行可视化分析。热力图如图\ref{fig:heatmap_6farms}所示。
+输入特征的选择对提高预测精度至关重要，而相关性分析对于变量的选取具有重要意义。本文采用皮尔逊相关系数（The Pearson correlation coefficient,PCC）来分析各输入特征与输出变量之间的相关性，并结合热力图进行可视化分析。热力图如图\ref{fig:heatmap_6farms}所示。
 
 在功率方面，WS\_x(即,不同高度的风速)具有最高的PCC。轮毂高度对于风力机的每个模型来说是不同的，因此WS\_cen代表了不同的高度。风电场场址1、2、3、4、5、6的轮毂高度分别为85m、120m、80m、85m / 90m、90m、65m。因此风速对风电功率起主导作用，结合图\ref{fig:wind_speed_power_scatter}可以看出，实际风功率曲线呈现出典型的“S型”非线性特征：当风速低于切入风速或高于切出风速时，功率基本为零；在切入与额定风速之间，功率随风速增加呈近似三次方增长；达到额定风速后，功率维持在额定值附近波动。
 

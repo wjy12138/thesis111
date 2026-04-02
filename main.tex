@@ -16,37 +16,33 @@
 
 \begin{cnabstract}
 
-摘要是论文（设计）内容不加注释和评论的简短陈述，应具有独立性和自明
-性，即不阅读论文（设计）的全文，就可以获得必要的信息。
+随着可再生能源快速发展，风力发电在现代电力系统中的占比持续提升。然而，风电功率受风速、风向及气象条件影响，具有明显的随机性和波动性，准确的超短期风电功率预测对电网的实时调度与安全运行具有重要意义。
 
-摘要一般应说明研究工作的目的 和意义、研究思想和方法、研究过程、研究
-结果和最终结论等。摘要中一般不用图、表、化学结构式、计算机程序，不用非
-公知公用的符号、术语和非法定的计量单位。
+本文以六个不同地理位置和装机容量（36$\sim$200 MW）的实际风电场为研究对象，利用2019—2020年的15分钟分辨率历史运行数据，对卷积神经网络（CNN）、长短期记忆网络（LSTM）和CNN-LSTM混合模型三种深度学习方法在超短期风电功率多步预测任务中的性能进行了系统研究与对比分析。
 
-中文摘要一般为 300~500 汉字。
+在数据预处理阶段，采用插值法处理缺失值，利用四分位距（IQR）方法识别并约束异常值，对时间特征进行正余弦周期编码，并以滑动时间窗口方法构造深度学习样本；数据集按70\%、15\%、15\%的比例划分为训练集、验证集和测试集。在模型训练阶段，以均方误差（MSE）为损失函数，采用Adam优化器对三种模型进行统一训练，预测步长覆盖未来15分钟至90分钟（LF=1至LF=6）。
 
-摘要页置于英文题名页后。
+实验结果表明：在15分钟单步预测（LF=1）时，三种模型精度相近，$R^2$均超过0.97；随着预测步长增加，LSTM的误差增长最快，在60分钟预测（LF=4）时均方误差（MSE）达97.74，而CNN-LSTM将MSE控制在67.85，较LSTM降低约30.6\%；在六个风电场的泛化测试中，三种模型单步预测的$R^2$均超过0.97，CNN-LSTM在较长步长预测中表现最为稳定。
 
-关键词是从论文（设计）题名、摘要或正文中选取的对表示论文（设计）主
-题内容起关键作用，且具有检索意义的词或词组。一般每篇论文（设计）应选取
-3~5 个词作为关键词，以显著的字符另起一行，排在同种语言摘要的下方，尽量用
-《汉语主题词表》或各专业主题词表提供的规范词。
-
-关键词与摘要的内容之间空一行。关键词的词间用分号间隔，末尾不加标点。
+综合来看，CNN-LSTM混合模型在多步预测精度和跨风场泛化能力上均优于单一模型，具有较好的工程应用价值。
 
 \end{cnabstract}
 
-\cnkeywords{关键词一；关键词二；关键词三}
+\cnkeywords{风电功率预测；超短期预测；卷积神经网络；长短期记忆网络；深度学习}
 
 % 英文摘要
 \begin{enabstract}
-This is the English abstract. The abstract should be a concise summary of the thesis (design), providing an overview of the research purpose, methodology, process, results, and conclusions. It should be self-contained and independent, allowing readers to grasp the essential information without reading the full text.
+With the rapid growth of renewable energy, wind power accounts for an increasing share of modern power systems. However, wind power output is significantly influenced by wind speed, wind direction, and meteorological conditions, exhibiting strong randomness and volatility. Accurate ultra-short-term wind power forecasting plays a critical role in supporting real-time grid dispatching and secure system operation.
 
-Figures, tables, chemical structural formulas, computer programs, non-public symbols, terms, and non-statutory measurement units should generally not be used in the abstract.
+This thesis conducts a systematic study on the ultra-short-term multi-step wind power forecasting performance of three deep learning methods—Convolutional Neural Network (CNN), Long Short-Term Memory network (LSTM), and the hybrid CNN-LSTM model—using historical operational data (15-minute resolution, 2019–2020) from six real wind farms with varying geographical locations and installed capacities (36–200 MW).
 
-The English abstract is typically 300-500 words and is placed after the English title page.
+In the data preprocessing stage, missing values are handled by linear interpolation, outliers are identified and constrained using the interquartile range (IQR) method, time features are encoded using sine-cosine periodic functions, and samples are constructed using a sliding time window approach. The dataset is split into training (70\%), validation (15\%), and test (15\%) sets. During model training, all three models are optimized with the Adam optimizer and mean squared error (MSE) as the loss function, with forecasting horizons ranging from 15 minutes to 90 minutes (LF=1 to LF=6, each step 15 minutes).
+
+Experimental results show that at the 15-minute single-step forecast (LF=1), all three models achieve similar accuracy with $R^2$ exceeding 0.97. As the forecast horizon increases, LSTM's error grows most rapidly, reaching an MSE of 97.74 at the 60-minute horizon (LF=4), while CNN-LSTM limits the MSE to 67.85, a reduction of approximately 30.6\% compared to LSTM. In generalization tests across all six wind farms, all models achieve $R^2$ above 0.97 for single-step forecasting, and CNN-LSTM demonstrates the most stable performance at longer forecast horizons.
+
+In summary, the CNN-LSTM hybrid model outperforms single-architecture models in both multi-step forecasting accuracy and cross-site generalization ability, demonstrating good practical engineering value.
 \end{enabstract}
-\enkeywords{Keyword One; Keyword Two; Keyword Three}
+\enkeywords{Wind Power Forecasting; Ultra-Short-Term Prediction; Convolutional Neural Network; Long Short-Term Memory; Deep Learning}
 
 
 \tableofcontents
@@ -68,9 +64,9 @@ The English abstract is typically 300-500 words and is placed after the English 
 \clearpage
 \input{chapters/chap03}
 \clearpage
-\input{chapters/chap06}
+\input{chapters/chap04}
 \clearpage
-\input{chapters/chap07}
+\input{chapters/chap05}
 \bibliography{ref1}
 
 \end{document}

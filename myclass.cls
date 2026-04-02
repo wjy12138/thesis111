@@ -200,7 +200,7 @@
         { \rmfamily \bfseries \zihao{-2} Electrical Engineering and Automation \vspace{17pt}}
 
         % 学院    
-        { \rmfamily \bfseries \zihao{-2} SCHOLL OF ELECTRICAL ENGINEERING \vspace{17pt}}
+        { \rmfamily \bfseries \zihao{-2} SCHOOL OF ELECTRICAL ENGINEERING \vspace{17pt}}
 
         % --- Chongqing University 前间距（已缩小） ---
 
