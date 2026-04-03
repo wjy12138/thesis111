@@ -1,4 +1,4 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{27}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\else
@@ -11,98 +11,173 @@
   \let\eprint\href
 \fi
 
-\bibitem[Liu et~al.(2025)Liu, Guo, Zhang, and Zuo]{liuComprehensiveReviewWind2025b}
+\bibitem[Liu et~al.(2025)Liu, Guo, Zhang, and Zuo]{liu_comprehensive_2025}
 LIU Z, GUO H, ZHANG Y, et~al.
-\newblock A {{Comprehensive Review}} of {{Wind Power Prediction Based}} on {{Machine Learning}}: {{Models}}, {{Applications}}, and {{Challenges}}\allowbreak[J/OL].
+\newblock A comprehensive review of wind power prediction based on machine learning: Models, applications, and challenges\allowbreak[J/OL].
 \newblock Energies, 2025, 18\allowbreak (2): 350\allowbreak[2026-03-13].
 \newblock \url{https://www.mdpi.com/1996-1073/18/2/350}.
 \newblock DOI: \doi{10.3390/en18020350}.
 
-\bibitem[{韩自奋}\ 等(2019){韩自奋}, {景乾明}, {张彦凯}, {拜润卿}, {郭空明}, and {章云}]{HanZiFenFengDianYuCeFangFaYuXinQuShiZongShu2019}
+\bibitem[{韩自奋}\ 等(2019){韩自奋}, {景乾明}, {张彦凯}, {拜润卿}, {郭空明}, and {章云}]{__2019}
 {韩自奋}, {景乾明}, {张彦凯}, 等.
 \newblock 风电预测方法与新趋势综述\allowbreak[J/OL].
 \newblock 电力系统保护与控制, 2019, 47\allowbreak (24): 178-187.
 \newblock \url{https://link.cnki.net/doi/10.19783/j.cnki.pspc.190128}.
 
-\bibitem[Yang et~al.(2024)Yang, Lou, Wu, Zhang, and Gao]{yangSurveyWindPower2024}
+\bibitem[Yang et~al.(2024)Yang, Lou, Wu, Zhang, and Gao]{yang_survey_2024}
 YANG Y, LOU H, WU J, et~al.
 \newblock A survey on wind power forecasting with machine learning approaches\allowbreak[J/OL].
 \newblock Neural Computing and Applications, 2024, 36\allowbreak (21): 12753-12773\allowbreak[2026-03-13].
 \newblock \url{https://link.springer.com/10.1007/s00521-024-09923-4}.
 
-\bibitem[{黎静华}\ 等(2017){黎静华}, {桑川川}, {甘一夫}, and {潘毅}]{LiJingHuaFengDianGongLuYuCeJiShuYanJiuZongShu2017}
+\bibitem[{黎静华}\ 等(2017){黎静华}, {桑川川}, {甘一夫}, and {潘毅}]{__2017-1}
 {黎静华}, {桑川川}, {甘一夫}, 等.
 \newblock 风电功率预测技术研究综述\allowbreak[J/OL].
 \newblock 现代电力, 2017, 34\allowbreak (3): 1-11.
 \newblock \url{https://link.cnki.net/doi/10.19725/j.cnki.1007-2322.2017.03.001}.
 
-\bibitem[{孙荣富}\ 等(2021){孙荣富}, {张涛}, {和青}, and {徐海翔}]{SunRongFuFengDianGongLuYuCeGuanJianJiShuJiYingYongZongShu2021}
+\bibitem[{孙荣富}\ 等(2021){孙荣富}, {张涛}, {和青}, and {徐海翔}]{__2021}
 {孙荣富}, {张涛}, {和青}, 等.
 \newblock 风电功率预测关键技术及应用综述\allowbreak[J/OL].
 \newblock 高电压技术, 2021, 47\allowbreak (4): 1129-1143.
 \newblock \url{https://link.cnki.net/doi/10.13336/j.1003-6520.hve.20201780}.
 
-\bibitem[{徐曼}\ 等(2011){徐曼}, {乔颖}, and {鲁宗相}]{XuManDuanQiFengDianGongLuYuCeWuChaiZongHePingJieFangFa2011}
+\bibitem[{徐曼}\ 等(2011){徐曼}, {乔颖}, and {鲁宗相}]{__2011}
 {徐曼}, {乔颖}, {鲁宗相}.
-\newblock 短期风电功率预测误差综合评价方法\allowbreak[J].
+\newblock 短期风电功率预测误差综合评价方法\allowbreak[J/OL].
 \newblock 电力系统自动化, 2011, 35\allowbreak (12): 20-26.
+\newblock \url{https://kns.cnki.net/kcms2/article/abstract?v=tC3tAMdiXNcJ4k7ciwitE9lQAgZJxPL0ANBTgAsE_Q27c_jP_wFUGlcfowU026smF_fIsCHS1t1FtpjZTxfnSoCbOu87MAYgKyUIsjvro4mO_A5K9TrlERzohQDz_mtSOxyzQQ3ggV0j9iUYdv0T7e3gVgkhh_IbcHFyHVQNspCTSN92Im3cSA==&uniplatform=NZKPT&language=CHS}.
 
-\bibitem[Liu et~al.(2019)Liu and Chen]{liuDataProcessingStrategies2019}
-LIU H, CHEN C.
-\newblock Data processing strategies in wind energy forecasting models and applications: {{A}} comprehensive review\allowbreak[J/OL].
-\newblock Applied Energy, 2019, 249: 392-408\allowbreak[2026-03-04].
-\newblock \url{https://linkinghub.elsevier.com/retrieve/pii/S0306261919308517}.
-\newblock DOI: \doi{10.1016/j.apenergy.2019.04.188}.
+\bibitem[Liu et~al.(2019)Liu, Chen, Lv, Wu, and Liu]{liu_deterministic_2019}
+LIU H, CHEN C, LV X, et~al.
+\newblock Deterministic wind energy forecasting: A review of intelligent predictors and auxiliary methods\allowbreak[J/OL].
+\newblock Energy Conversion and Management, 2019, 195: 328-345\allowbreak[2026-03-04].
+\newblock \url{https://linkinghub.elsevier.com/retrieve/pii/S0196890419305655}.
+\newblock DOI: \doi{10.1016/j.enconman.2019.05.020}.
 
-\bibitem[Wu et~al.(2022)Wu, Luo, Yang, Guo, Li, and Xue]{wuComprehensiveReviewDeep2022}
+\bibitem[Wu et~al.(2022)Wu, Luo, Yang, Guo, Li, and Xue]{wu_comprehensive_2022}
 WU Z, LUO G, YANG Z, et~al.
 \newblock A comprehensive review on deep learning approaches in wind forecasting applications\allowbreak[J/OL].
-\newblock CAAI Transactions on Intelligence Technology, 2022, 7\allowbreak (2): 129-143\allowbreak[2026-03-13].
+\newblock {CAAI} Transactions on Intelligence Technology, 2022, 7\allowbreak (2): 129-143\allowbreak[2026-03-13].
 \newblock \url{https://ietresearch.onlinelibrary.wiley.com/doi/10.1049/cit2.12076}.
 
-\bibitem[Zhang et~al.(2019)Zhang, Yan, Infield, Liu, and Lien]{zhangShorttermForecastingUncertainty2019}
-ZHANG J, YAN J, INFIELD D, et~al.
-\newblock Short-term forecasting and uncertainty analysis of wind turbine power based on long short-term memory network and {{Gaussian}} mixture model\allowbreak[J/OL].
-\newblock Applied Energy, 2019, 241: 229-244\allowbreak[2026-03-04].
-\newblock \url{https://linkinghub.elsevier.com/retrieve/pii/S0306261919304532}.
-\newblock DOI: \doi{10.1016/j.apenergy.2019.03.044}.
+\bibitem[{杨秀媛}\ 等(2005){杨秀媛}, {肖洋}, and {陈树勇}]{__2005}
+{杨秀媛}, {肖洋}, {陈树勇}.
+\newblock 风电场风速和发电功率预测研究\allowbreak[J/OL].
+\newblock 中国电机工程学报, 2005\allowbreak (11): 1-5\allowbreak[2026-04-03].
+\newblock \url{https://doi.org/10.13334/j.0258-8013.pcsee.2005.11.001}.
 
-\bibitem[Duong Hoang~Vu et~al.(2025)Duong Hoang~Vu, Phung~Mac, Tran~Ngoc, Nguyen~Dinh, and Nguyen~Tuan]{duonghoangvuMultistepWindPower2025}
-DUONG HOANG~VU L, PHUNG~MAC Q, TRAN~NGOC K, et~al.
-\newblock Multi-step wind power forecasting over 24 hours using a {{CNN-LSTM}} hybrid model\allowbreak[J/OL].
-\newblock Journal of Measurement, Control, and Automation, 2025, 29\allowbreak (4): 59-66\allowbreak[2026-03-13].
-\newblock \url{https://mca-journal.org/index.php/mca/article/view/345}.
-\newblock DOI: \doi{10.64032/mca.v29i4.345}.
+\bibitem[{王丽婕}\ 等(2007){王丽婕}, {廖晓钟}, {高爽}, and {冬雷}]{_-_2007}
+{王丽婕}, {廖晓钟}, {高爽}, 等.
+\newblock 并网型大型风电场风力发电功率-时间序列的混沌属性分析\allowbreak[J/OL].
+\newblock 北京理工大学学报, 2007\allowbreak (12): 1077-1080\allowbreak[2026-04-03].
+\newblock \url{https://doi.org/10.15918/j.tbit1001-0645.2007.12.014}.
 
-\bibitem[Niu et~al.(2020)Niu, Yu, Tang, Wu, and Reformat]{niuWindPowerForecasting2020}
-NIU Z, YU Z, TANG W, et~al.
-\newblock Wind power forecasting using attention-based gated recurrent unit network\allowbreak[J/OL].
-\newblock Energy, 2020, 196: 117081\allowbreak[2026-03-04].
-\newblock \url{https://linkinghub.elsevier.com/retrieve/pii/S0360544220301882}.
-\newblock DOI: \doi{10.1016/j.energy.2020.117081}.
+\bibitem[{王丽婕}\ 等(2009){王丽婕}, {冬雷}, {廖晓钟}, and {高阳}]{__2009}
+{王丽婕}, {冬雷}, {廖晓钟}, 等.
+\newblock 基于小波分析的风电场短期发电功率预测\allowbreak[J/OL].
+\newblock 中国电机工程学报, 2009, 29\allowbreak (28): 30-33\allowbreak[2026-04-03].
+\newblock \url{https://doi.org/10.13334/j.0258-8013.pcsee.2009.28.012}.
 
-\bibitem[Wu et~al.(2022)Wu, Jiang, Lai, Zhao, and Lai]{wuShortTermWindPower2022}
-WU X, JIANG S, LAI C~S, et~al.
-\newblock Short-{{Term Wind Power Prediction Based}} on {{Data Decomposition}} and {{Combined Deep Neural Network}}\allowbreak[J/OL].
-\newblock Energies, 2022, 15\allowbreak (18): 6734\allowbreak[2026-03-13].
-\newblock \url{https://www.mdpi.com/1996-1073/15/18/6734}.
-\newblock DOI: \doi{10.3390/en15186734}.
+\bibitem[{孟洋洋}\ 等(2010){孟洋洋}, {卢继平}, {孙华利}, {潘雪}, {高道春}, and {廖勇}]{__2010}
+{孟洋洋}, {卢继平}, {孙华利}, 等.
+\newblock 基于相似日和人工神经网络的风电功率短期预测\allowbreak[J/OL].
+\newblock 电网技术, 2010, 34\allowbreak (12): 163-167\allowbreak[2026-04-03].
+\newblock \url{https://doi.org/10.13335/j.1000-3673.pst.2010.12.026}.
 
-\bibitem[{朱乔木}\ 等(2017){朱乔木}, {李弘毅}, {王子琪}, {陈金富}, and {王博}]{ZhuQiaoMuJiYuChangDuanQiJiYiWangLuoDeFengDianChangFaDianGongLuChaoDuanQiYuCe2017}
+\bibitem[{刘克文}\ 等(2013){刘克文}, {蒲天骄}, {周海明}, and {刘广一}]{__2013}
+{刘克文}, {蒲天骄}, {周海明}, 等.
+\newblock 风电日前发电功率的集成学习预测模型\allowbreak[J/OL].
+\newblock 中国电机工程学报, 2013, 33\allowbreak (34): 130-135\allowbreak[2026-04-03].
+\newblock \url{https://doi.org/10.13334/j.0258-8013.pcsee.2013.34.018}.
+
+\bibitem[{朱乔木}\ 等(2017){朱乔木}, {李弘毅}, {王子琪}, {陈金富}, and {王博}]{__2017}
 {朱乔木}, {李弘毅}, {王子琪}, 等.
 \newblock 基于长短期记忆网络的风电场发电功率超短期预测\allowbreak[J/OL].
 \newblock 电网技术, 2017, 41\allowbreak (12): 3797-3802.
 \newblock \url{https://link.cnki.net/doi/10.13335/j.1000-3673.pst.2017.1657}.
 
-\bibitem[{李大中}\ 等(2021){李大中} and {李颖宇}]{LiDaZhongJiYuShenDuXueXiYuWuChaiXiuZhengDeChaoDuanQiFengDianGongLuYuCe2021}
+\bibitem[{谢小瑜}\ 等(2021){谢小瑜}, {周俊煌}, {张勇军}, {王奖}, and {苏洁莹}]{_w-bilstm_2021}
+{谢小瑜}, {周俊煌}, {张勇军}, 等.
+\newblock 基于W-{BiLSTM的可再生能源超短期发电功率预测方法}\allowbreak[J/OL].
+\newblock 电力系统自动化, 2021, 45\allowbreak (8): 175-184\allowbreak[2026-04-03].
+\newblock \url{https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFDLAST2021&filename=DLXT202108021}.
+
+\bibitem[{李大中}\ 等(2021){李大中} and {李颖宇}]{__2021-1}
 {李大中}, {李颖宇}.
 \newblock 基于深度学习与误差修正的超短期风电功率预测\allowbreak[J/OL].
 \newblock 太阳能学报, 2021, 42\allowbreak (12): 200-205.
 \newblock \url{https://link.cnki.net/doi/10.19912/j.0254-0096.tynxb.2019-1464}.
 
-\bibitem[{王晓宇}\ 等(2022){王晓宇}, {张明}, and {刘志远}]{WangXiaoYuJiYuCNNLSTMDeFengDianGongLuDuoBuYuCe2022}
-{王晓宇}, {张明}, {刘志远}.
-\newblock 基于CNN-LSTM的风电功率多步预测方法\allowbreak[J].
-\newblock 电力系统自动化, 2022, 46\allowbreak (8): 42-49.
+\bibitem[{陈大为}\ 等(2025){陈大为}, {张玮}, and {慕龙}]{_lstmxgboost_2025}
+{陈大为}, {张玮}, {慕龙}.
+\newblock {LSTM与XGBoost混合模型在风力发电功率预测中的应用}\allowbreak[J/OL].
+\newblock 无线互联科技, 2025, 22\allowbreak (1): 63-66\allowbreak[2026-04-03].
+\newblock \url{https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFDLAST2025&filename=WXHK202501015}.
+
+\bibitem[{王丽杰}\ 等(2022){王丽杰}, {唐宏芬}, {张真真}, and {张路娜}]{__2022-1}
+{王丽杰}, {唐宏芬}, {张真真}, 等.
+\newblock 基于新型混合深度学习的风电机组功率预测模型开发及应用\allowbreak[J/OL].
+\newblock 电力科技与环保, 2022, 38\allowbreak (1): 72-78\allowbreak[2026-04-03].
+\newblock \url{https://doi.org/10.19944/j.eptep.1674-8069.2022.01.010}.
+
+\bibitem[{韩顺天}(2025)]{__2025-2}
+{韩顺天}.
+\newblock 基于变分模态分解与通道融合的风力发电功率预测\allowbreak[J/OL].
+\newblock 现代工业经济和信息化, 2025, 15\allowbreak (5): 81-83\allowbreak[2026-04-03].
+\newblock \url{https://link.cnki.net/doi/10.16525/j.cnki.14-1362/n.2025.05.023}.
+
+\bibitem[{张东}(2025)]{__2025-1}
+{张东}.
+\newblock 超短期风力发电功率预测系统关键技术研究\allowbreak[J/OL].
+\newblock 工程建设与设计, 2025\allowbreak (17): 164-167\allowbreak[2026-04-03].
+\newblock \url{https://link.cnki.net/doi/10.13616/j.cnki.gcjsysj.2025.09.048}.
+
+\bibitem[{马昕远}\ 等(2025){马昕远} and {伊海港}]{_cnn-lstm-attention_2025}
+{马昕远}, {伊海港}.
+\newblock 基于{CNN}-{LSTM}-Attention的风力发电功率预测与可解释性分析\allowbreak[J/OL].
+\newblock 长江信息通信, 2025, 38\allowbreak (11): 17-21\allowbreak[2026-04-03].
+\newblock \url{https://doi.org/10.20153/j.issn.2096-9759.2025.11.005}.
+
+\bibitem[Chen et~al.(2022)Chen and Xu]{chen_solar_2022}
+CHEN Y, XU J.
+\newblock Solar and wind power data from the chinese state grid renewable energy generation forecasting competition\allowbreak[J/OL].
+\newblock Scientific Data, 2022, 9\allowbreak (1): 577\allowbreak[2026-03-19].
+\newblock \url{https://www.nature.com/articles/s41597-022-01696-6}.
+\newblock DOI: \doi{10.1038/s41597-022-01696-6}.
+
+\bibitem[Liu et~al.(2019)Liu and Chen]{liu_data_2019}
+LIU H, CHEN C.
+\newblock Data processing strategies in wind energy forecasting models and applications: A comprehensive review\allowbreak[J/OL].
+\newblock Applied Energy, 2019, 249: 392-408\allowbreak[2026-03-04].
+\newblock \url{https://linkinghub.elsevier.com/retrieve/pii/S0306261919308517}.
+\newblock DOI: \doi{10.1016/j.apenergy.2019.04.188}.
+
+\bibitem[{薛禹胜}\ 等(2015){薛禹胜}, {郁琛}, {赵俊华}, Li, Liu, Wu, and Yang]{__2015}
+{薛禹胜}, {郁琛}, {赵俊华}, 等.
+\newblock 关于短期及超短期风电功率预测的评述\allowbreak[J/OL].
+\newblock 电力系统自动化, 2015, 39\allowbreak (6)\allowbreak[2026-03-27].
+\newblock \url{https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFQ&dbname=CJFDLAST2015&filename=DLXT201506024}.
+
+\bibitem[Zhang et~al.(2019)Zhang, Yan, Infield, Liu, and Lien]{zhang_short-term_2019}
+ZHANG J, YAN J, INFIELD D, et~al.
+\newblock Short-term forecasting and uncertainty analysis of wind turbine power based on long short-term memory network and gaussian mixture model\allowbreak[J/OL].
+\newblock Applied Energy, 2019, 241: 229-244\allowbreak[2026-03-04].
+\newblock \url{https://linkinghub.elsevier.com/retrieve/pii/S0306261919304532}.
+\newblock DOI: \doi{10.1016/j.apenergy.2019.03.044}.
+
+\bibitem[Agga et~al.(2022)Agga, Abbou, Labbadi, Houm, and Ou~Ali]{agga_cnn-lstm_2022}
+AGGA A, ABBOU A, LABBADI M, et~al.
+\newblock {CNN}-{LSTM}: An efficient hybrid deep learning architecture for predicting short-term photovoltaic power production\allowbreak[J/OL].
+\newblock Electric Power Systems Research, 2022, 208: 107908\allowbreak[2026-03-24].
+\newblock \url{https://linkinghub.elsevier.com/retrieve/pii/S0378779622001389}.
+\newblock DOI: \doi{10.1016/j.epsr.2022.107908}.
+
+\bibitem[Wu et~al.(2022)Wu, Jiang, Lai, Zhao, and Lai]{wu_short-term_2022}
+WU X, JIANG S, LAI C~S, et~al.
+\newblock Short-term wind power prediction based on data decomposition and combined deep neural network\allowbreak[J/OL].
+\newblock Energies, 2022, 15\allowbreak (18): 6734\allowbreak[2026-03-13].
+\newblock \url{https://www.mdpi.com/1996-1073/15/18/6734}.
+\newblock DOI: \doi{10.3390/en15186734}.
 
 \end{thebibliography}

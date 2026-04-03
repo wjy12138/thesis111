@@ -14,45 +14,48 @@ Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=200001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-Database file #1: ref1.bib
-You've used 15 entries,
+Database file #1: ref4.bib
+Warning--"{CAAI" isn't a brace-balanced string for entry wu_comprehensive_2022
+while executing--line 2449 of file gbt7714-numerical.bst
+You've used 27 entries,
             5374 wiz_defined-function locations,
-            1193 strings with 12706 characters,
-and the built_in function-call counts, 77537 in all, are:
-= -- 4046
-> -- 7102
-< -- 7902
-+ -- 2743
-- -- 1652
-* -- 1195
-:= -- 11675
-add.period$ -- 64
-call.type$ -- 15
-change.case$ -- 91
-chr.to.int$ -- 2068
-cite$ -- 15
-duplicate$ -- 371
-empty$ -- 1864
-format.name$ -- 495
-if$ -- 19812
+            1293 strings with 18639 characters,
+and the built_in function-call counts, 142350 in all, are:
+= -- 7196
+> -- 12207
+< -- 15202
++ -- 5638
+- -- 2819
+* -- 2176
+:= -- 21869
+add.period$ -- 115
+call.type$ -- 27
+change.case$ -- 121
+chr.to.int$ -- 4448
+cite$ -- 27
+duplicate$ -- 705
+empty$ -- 3529
+format.name$ -- 812
+if$ -- 36025
 int.to.chr$ -- 1
-int.to.str$ -- 16
+int.to.str$ -- 28
 missing$ -- 0
-newline$ -- 108
-num.names$ -- 45
-pop$ -- 2335
+newline$ -- 183
+num.names$ -- 81
+pop$ -- 3518
 preamble$ -- 1
-purify$ -- 15
+purify$ -- 27
 quote$ -- 0
-skip$ -- 7445
+skip$ -- 13187
 stack$ -- 0
-substring$ -- 5179
-swap$ -- 15
-text.length$ -- 382
+substring$ -- 10121
+swap$ -- 27
+text.length$ -- 680
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 195
+type$ -- 351
 warning$ -- 0
-while$ -- 409
+while$ -- 730
 width$ -- 0
-write$ -- 281
+write$ -- 499
+(There was 1 warning)
