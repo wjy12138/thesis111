@@ -65,7 +65,7 @@
     \end{tabular}
 \end{table}
 
-由表~\ref{tab:site1_full_metrics} 可以看出：在最短15分钟预测（LF=1）时，三种模型的差距很小，LSTM和CNN的$R^2$均达到0.977，CNN-LSTM为0.971，三者精度相当。但随着预测时间延长，各模型的差距逐渐拉大。在预测60分钟（LF=4）时，LSTM的MSE为97.74，而CNN-LSTM的MSE为67.85，比LSTM低约30.6\%，优势较为明显。这是因为LSTM在进行多步预测时，对长时间依赖的刻画更容易受到误差累积影响；而CNN-LSTM通过卷积层先对输入数据进行特征提取，能够更有效地捕捉功率变化的局部规律，从而在较长时间预测时保持较好的精度。需要指出的是，在最长预测步长LF=6（90分钟）时，CNN-LSTM的MSE为117.73，略高于CNN的114.61，但其MAE为6.52，仍低于CNN的7.08。这表明在最长步长下，CNN模型在抑制少量大误差样本方面更具鲁棒性，而CNN-LSTM在平均绝对偏差控制上仍保持一定优势。
+由表~\ref{tab:site1_full_metrics} 可以看出：在最短15分钟预测（LF=1）时，三种模型的差距很小，LSTM和CNN的$R^2$均达到0.977，CNN-LSTM为0.971，三者精度相当。但随着预测时间延长，各模型的差距逐渐拉大。在预测60分钟（LF=4）时，LSTM的MSE为97.74，而CNN-LSTM的MSE为67.85，比LSTM低约30.6\%，优势较为明显。这是因为LSTM在进行多步预测时，对长时间依赖的刻画更容易受到误差累积影响；而CNN-LSTM通过卷积层先对输入数据进行特征提取，能够更有效地捕捉功率变化的局部规律，从而在较长时间预测时保持较好的精度。需要指出的是，在最长预测步长LF=6（90分钟）时，CNN-LSTM的MSE为117.73，略高于CNN的114.61，但其MAE为6.52，仍低于CNN的7.08。从指标定义看，MSE会对较大误差进行平方放大，因此对异常样本更敏感；MAE反映的是整体平均绝对偏差，对极端值的敏感性相对较低。由此可见，CNN-LSTM在LF=6时虽然对大多数样本的平均偏差控制更好，但可能存在少量偏差较大的样本，从而拉高了MSE。结合风电功率序列的波动特征，这类大误差样本可能对应功率快速爬坡、突降或极端波动工况，说明混合模型在最长步长下对极值工况的稳健性仍有改进空间，这也是后续研究可进一步关注的方向。
 
 图~\ref{fig:site1_zoom_lf1} 展示了一号风场在15分钟预测（LF=1）下的预测曲线局部放大图，可以直观地看到三种模型的预测值与真实值的贴合程度。
 
@@ -127,7 +127,7 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{figure/case_analysis/train_time_lb96_multi_lf.png}
+    \includegraphics[width=0.75\textwidth]{figure/case_analysis/train_time_lb96_multi_lf.pdf}
     \caption{三种模型在不同预测步长下的训练时间对比}
     \label{fig:train_time_bars}
 \end{figure}

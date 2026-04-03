@@ -13,6 +13,7 @@
 \RequirePackage{tabularx}  % 表格支持
 \RequirePackage{geometry}  % 页面布局
 \RequirePackage{graphicx}  % 图片支持
+\RequirePackage{tikz}      % 矢量示意图支持
 \RequirePackage{setspace}  % 行距控制
 \RequirePackage{fontspec}  % 字体设置
 \RequirePackage{fancyhdr} % 标题格式控制
@@ -24,6 +25,7 @@
 \RequirePackage{caption}    % 【新增】用于控制标题格式
 \RequirePackage{etoolbox}   % 【新增】用于自动化设置表格内容字体
 \RequirePackage[super]{gbt7714} % 参考文献支持（内部已加载natbib）
+\usetikzlibrary{arrows.meta,calc,positioning}
 % 3. 配置英文主字体为 Times New Roman
 \setmainfont{Times New Roman}
 
@@ -121,7 +123,6 @@
                 % 设置左缩进 3.49cm
                 \setlength{\leftskip}{3.49cm}
 
-                % 【关键修正2】盒子宽度改为 6em (适配 "助理指导教师" 6个字)
                 % [s] 表示分散对齐
                 \newcommand{\fieldlabel}[1]{\makebox[4em][s]{##1}}
 
@@ -129,7 +130,6 @@
                 \noindent \fieldlabel{学生}：王锦源 \par
                 \noindent \fieldlabel{学号}：20221067 \par
                 \noindent \fieldlabel{指导教师}：赵霞 \par
-                \noindent \fieldlabel{助理指导}教师：XXX \par
                 \noindent \fieldlabel{专业}：电气工程及其自动化 \par
             \end{flushleft}
         }
@@ -141,7 +141,7 @@
 
         % --- 5. 学院名称 ---
         % 小二，居中
-        {\centering \heiti \zihao{-2} 重庆大学电气工程及其自动化学院 \par}
+        {\centering \heiti \zihao{-2} 重庆大学电气工程学院 \par}
 
         % --- 6. 日期 ---
         % 黑体三号，段前12磅，居中
@@ -189,10 +189,6 @@
         { \rmfamily \bfseries \zihao{3} Supervised by \vspace{17pt}}
 
         { \rmfamily \bfseries \zihao{3} Prof. ZHAO Xia \vspace{16pt} }
-
-        { \rmfamily \bfseries \zihao{3} and \vspace{17pt}}
-
-        { \rmfamily \bfseries \zihao{3} Prof. LI XX }
 
         { \zihao{3} \setlength{\baselineskip}{33pt} \vspace{1\baselineskip} }
 

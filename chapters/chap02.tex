@@ -8,7 +8,7 @@
 
 该数据集中风电数据来自中国六个风电场，数据由SCADA系统采集，时间分辨率为15分钟，时间跨度为2019—2020年。每个风电场数据文件均记录了功率和气象变量，包括不同高度的风速、温度、湿度、气压、风向等共11项特征数据以及总功率输出。相关数据说明文章指出，轮毂高度风速是最重要的变量之一。风电场分布在中国北部、中部和西北部，地形类型包括沙漠、山地和平原。
 
-各风电场数据集的结构基本一致，都包含采样时间以及12个气象和运行特征，其中时间字段为 \texttt{Time(year-month-day h:m:s)}，用于表征样本采集时刻；气象特征主要包括 10\,m、30\,m 和 50\,m 高度处的风速与风向，轮毂高度处的风速与风向，以及空气温度、气压和相对湿度等变量。具体而言，输入特征字段共 12 个，分别为：Wind speed at height of 10 meters (m/s)、Wind direction at height of 10 meters (˚)、Wind speed at height of 30 meters (m/s)、Wind direction at height of 30 meters (˚)、Wind speed at height of 50 meters (m/s)、Wind direction at height of 50 meters (˚)、Wind speed at the height of wheel hub (m/s)、Wind speed at the height of wheel hub (˚)、Air temperature (°C)、Atmosphere (hpa)、Relative humidity (\%)，以及时间信息所隐含的时序变化特征。目标变量为 Power (MW)，表示对应时刻风电场的实际输出功率。表~\ref{tab:wind_farm_features} 描述了各个列标题的含义和缩写，后续可视化为了方便将采取缩写形式。
+各风电场数据集的结构基本一致，都包含采样时间以及12个气象和运行特征，其中时间字段为 \texttt{Time(year-month-day h:m:s)}，用于表征样本采集时刻；气象特征主要包括 10\,m、30\,m 和 50\,m 高度处的风速与风向，轮毂高度处的风速与风向，以及空气温度、气压和相对湿度等变量。具体而言，输入特征字段共 12 个，分别为：Wind speed at height of 10 meters (m/s)、Wind direction at height of 10 meters (˚)、Wind speed at height of 30 meters (m/s)、Wind direction at height of 30 meters (˚)、Wind speed at height of 50 meters (m/s)、Wind direction at height of 50 meters (˚)、Wind speed at the height of wheel hub (m/s)、原始字段名写作 Wind speed at the height of wheel hub (˚)、Air temperature (°C)、Atmosphere (hpa)、Relative humidity (\%)，以及时间信息所隐含的时序变化特征。结合其单位“˚”以及后续统计表中的数值范围可判断，该字段语义应为轮毂高度风向，原始数据集字段名在此处存在命名笔误，本文后续统一按“轮毂高度风向”理解和表述。目标变量为 Power (MW)，表示对应时刻风电场的实际输出功率。表~\ref{tab:wind_farm_features} 描述了各个列标题的含义和缩写，后续可视化为了方便将采取缩写形式。
 
 
 \end{sloppypar}
@@ -106,7 +106,7 @@
 温度、气压和湿度的Pearson相关系数在数值上表现为弱相关或极弱相关。然而，结合空气动力学原理$\rho=\frac{P}{R_sT_v}$可知，这三个物理量共同决定了空气密度。在相同的风速下，温度越低、气压越高、湿度越小，空气密度越大，风轮扫掠面积内蕴含的动能就越高。因此，温压湿主要是通过改变空气密度对风电功率产生非线性的微扰，这也是图\ref{fig:wind_speed_power_scatter}风速-功率散点图中主曲线上存在一定宽度（离散性）的重要原因之一。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figure/《图3-六个风场相关性热力图对比图》.eps}
+    \includegraphics[width=\textwidth]{figure/《图3-六个风场相关性热力图对比图》.pdf}
     \caption{风电场不同变量的Pearson相关系数}
     \label{fig:heatmap_6farms}
 \end{figure}
@@ -140,7 +140,31 @@
 本文建立的是时间序列预测模型，原长序列没有明确的输入输出，需要将数据构造成为成对的样本(X,y)。如图\ref{fig:sliding_window}所示，将前$n$个时间步的数据作为输入X，将第$n+1$个时间步的数据作为标签y。按照指定的步长滑动窗口，可以得到多个样本。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figure/slide window.png}
+    \begin{tikzpicture}[
+        box/.style={draw, rounded corners, minimum width=2.1cm, minimum height=0.95cm, align=center, font=\small},
+        target/.style={draw, rounded corners, minimum width=2.3cm, minimum height=0.95cm, align=center, font=\small, fill=gray!10},
+        arrow/.style={-{Latex[length=3mm]}, thick}
+    ]
+        \node[box, fill=blue!8] (x1) {$x_{t-95}$};
+        \node[box, fill=blue!8, right=0.25cm of x1] (x2) {$x_{t-94}$};
+        \node[box, fill=blue!8, right=0.25cm of x2] (x3) {$\cdots$};
+        \node[box, fill=blue!8, right=0.25cm of x3] (x4) {$x_{t-1}$};
+        \node[box, fill=blue!8, right=0.25cm of x4] (x5) {$x_t$};
+
+        \node[target, fill=red!8, below=1.3cm of x3] (y1) {$y_{t+1}$};
+        \draw[arrow] ($(x1.north)+(0,0.55)$) -- node[above, font=\small] {输入窗口长度 $n=96$} ($(x5.north)+(0,0.55)$);
+        \draw[arrow] (x3.south) -- (y1.north);
+
+        \node[box, fill=green!8, below=2.3cm of x1] (z1) {$x_{t-94}$};
+        \node[box, fill=green!8, right=0.25cm of z1] (z2) {$x_{t-93}$};
+        \node[box, fill=green!8, right=0.25cm of z2] (z3) {$\cdots$};
+        \node[box, fill=green!8, right=0.25cm of z3] (z4) {$x_t$};
+        \node[box, fill=green!8, right=0.25cm of z4] (z5) {$x_{t+1}$};
+        \node[target, fill=orange!12, below=1.3cm of z3] (y2) {$y_{t+2}$};
+        \draw[arrow] (z3.south) -- (y2.north);
+
+        \node[font=\small, below=0.25cm of y2] {窗口按时间步长向前滑动，依次生成监督学习样本 $(X,y)$};
+    \end{tikzpicture}
     \caption{滑动时间窗口构造}
     \label{fig:sliding_window}
 \end{figure}
