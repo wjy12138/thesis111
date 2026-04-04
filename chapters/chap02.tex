@@ -6,9 +6,9 @@
 \begin{sloppypar}
 本研究采用的风电场数据来源于公开数据集 \url{Renewable-energy-generation-input-feature-variables-analysis}，可通过 \url{https://github.com/Bob05757/Renewable-energy-generation-input-feature-variables-analysis} 获取。该数据集来自国家电网2021年举办的新能源发电预测竞赛，关于该数据集的数据说明可以从SCIENCE上的相关数据说明文章获取\cite{chen_solar_2022}。
 
-该数据集中风电数据来自中国六个风电场，数据由SCADA系统采集，时间分辨率为15分钟，时间跨度为2019—2020年。每个风电场数据文件均记录了功率和气象变量，包括不同高度的风速、温度、湿度、气压、风向等共11项特征数据以及总功率输出。相关数据说明文章指出，轮毂高度风速是最重要的变量之一。风电场分布在中国北部、中部和西北部，地形类型包括沙漠、山地和平原。
+该数据集中的风电数据来自中国六个风电场，数据由SCADA系统采集，时间分辨率为15分钟，时间跨度为2019—2020年。每个风电场数据文件均记录了功率和气象变量，包括不同高度的风速、温度、湿度、气压、风向等共11项特征数据以及总功率输出。相关数据说明文章指出，轮毂高度风速是最重要的变量之一。风电场分布在中国北部、中部和西北部，地形类型包括沙漠、山地和平原。
 
-各风电场数据集的结构基本一致，都包含采样时间以及12个气象和运行特征，其中时间字段为 \texttt{Time(year-month-day h:m:s)}，用于表征样本采集时刻；气象特征主要包括 10\,m、30\,m 和 50\,m 高度处的风速与风向，轮毂高度处的风速与风向，以及空气温度、气压和相对湿度等变量。具体而言，输入特征字段共 12 个，分别为：Wind speed at height of 10 meters (m/s)、Wind direction at height of 10 meters (˚)、Wind speed at height of 30 meters (m/s)、Wind direction at height of 30 meters (˚)、Wind speed at height of 50 meters (m/s)、Wind direction at height of 50 meters (˚)、Wind speed at the height of wheel hub (m/s)、原始字段名写作 Wind speed at the height of wheel hub (˚)、Air temperature (°C)、Atmosphere (hpa)、Relative humidity (\%)，以及时间信息所隐含的时序变化特征。结合其单位“˚”以及后续统计表中的数值范围可判断，该字段语义应为轮毂高度风向，原始数据集字段名在此处存在命名笔误，本文后续统一按“轮毂高度风向”理解和表述。目标变量为 Power (MW)，表示对应时刻风电场的实际输出功率。表~\ref{tab:wind_farm_features} 描述了各个列标题的含义和缩写，后续可视化为了方便将采取缩写形式。
+各风电场数据都包含采样时间以及12个气象和风电功率，其中时间字段为 \texttt{Time(year-month-day h:m:s)}，表示样本采集时刻；气象特征主要包括 10\,m、30\,m 和 50\,m 高度处的风速与风向，轮毂高度处的风速与风向，以及空气温度、气压和相对湿度等变量。输入特征共 12 个，分别为：Wind speed at height of 10 meters (m/s)、Wind direction at height of 10 meters (˚)、Wind speed at height of 30 meters (m/s)、Wind direction at height of 30 meters (˚)、Wind speed at height of 50 meters (m/s)、Wind direction at height of 50 meters (˚)、Wind speed at the height of wheel hub (m/s)、Air temperature (°C)、Atmosphere (hpa)、Relative humidity (\%)。其中Wind speed at the height of wheel hub (m/s)原始字段名写作 Wind speed at the height of wheel hub (˚)结合其单位“˚”和这一列的数值范围可以推断，这里记录的应为轮毂高度风向。本文后续统一按“轮毂高度风向”理解和表述。目标变量为 Power (MW)，表示对应时刻风电场的实际输出功率。表~\ref{tab:wind_farm_features} 描述了各个列标题的含义和缩写，后续可视化为了方便将采取缩写形式。
 
 
 \end{sloppypar}
@@ -172,13 +172,11 @@
 
 
 \subsection{训练集、验证集和测试集划分}
-风电功率预测为时间序列预测问题，样本之间存在时间先后关系。因此，数据集划分必须按照时间顺序，不能采用随机打乱的方式，否则会使未来时刻的信息泄漏到模型训练阶段，进而影响模型预测性能评估。
+风电功率预测属于典型的时间序列监督学习任务，样本之间存在严格的时间先后关系。因此，数据集划分必须遵循时间顺序，不能采用随机打乱的方式，否则会使未来时刻的信息泄漏到模型训练阶段，进而影响模型评估结果的客观性。
 
-设经过数据清洗后的总样本数为$N$，本文按照70\%、15\%和15\%的比例将数据依次划分为训练集、验证集和测试集。前70\%的样本用于模型训练，中间15\%的样本用于验证集，最后15\%的样本用于评估模型的最终预测性能。
+设经过数据清洗与特征构造后的总样本数为$N$，本文按照70\%、15\%和15\%的比例将数据依次划分为训练集、验证集和测试集。具体而言，时间轴前70\%的样本用于模型训练，中间15\%的样本用于验证集，以便在训练过程中进行超参数调整和过拟合监测，最后15\%的样本作为测试集，用于评价模型的最终预测性能。三个子数据集在时间轴上首尾相接，均保持原始时间顺序不变。
 
-为避免数据泄漏，归一化仅利用训练集样本进行拟合，随后将归一化参数应用于验证集和测试集，这样既能够保证不同数据子集处于同一数值尺度，又不会将验证集和测试集的统计信息提前引入训练过程。
+为避免数据泄漏，特征缩放参数仅利用训练集样本进行拟合，随后将同一组变换参数应用于验证集和测试集。这样既能够保证不同数据子集处于统一的数值尺度，又不会将验证集和测试集的统计信息提前引入训练过程。
 
-在样本构造阶段，本文采用长度为96的滑动时间窗口，即每次使用过去96个时间步的数据作为输入，对应过去24h的历史数据。预测步长为1、2、3、4、5、6步即过去一天的历史数据预测未来15分钟、30分钟、45分钟、60分钟、75分钟、90分钟的功率。
-
-
+在样本构造阶段，本文采用长度为96的滑动时间窗口，即每次使用过去96个时间步的数据作为输入，对应15分钟采样间隔下的24小时历史信息。
 
