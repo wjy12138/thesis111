@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{multirow}
+\usepackage{pdfpages}
 \begin{document}
 
 % 1. 生成封面
@@ -14,54 +15,13 @@
 \setcounter{page}{1} % 重置页码
 \pagenumbering{Roman} % 使用罗马数字页码
 \clearpage
-\phantomsection
-\addcontentsline{toc}{section}{原创性声明}
-\markboth{原创性声明}{}
-\thispagestyle{fancy}
-\begin{center}
-    \heiti \zihao{3} 原创性声明
-\end{center}
-\vspace{12pt}
-{\songti \zihao{-4}
-本人郑重声明：所呈交的毕业论文《风电功率深度学习预测方法研究》是在指导教师指导下独立完成的研究成果。除文中已经注明引用的内容外，本论文不包含任何他人已经发表或撰写过的研究成果，也不包含为获得重庆大学或其他教育机构学位或证书而使用过的材料。对本研究做出重要贡献的个人和集体，均已在文中以明确方式标明。本人完全意识到本声明的法律后果由本人承担。
-
-\vspace{36pt}
-\noindent 作者签名（手签）：\underline{\hspace{5cm}} \hfill 日期：\underline{\hspace{3cm}}
-\par}
-
-\clearpage
-\phantomsection
-\addcontentsline{toc}{section}{使用授权书}
-\markboth{使用授权书}{}
-\thispagestyle{fancy}
-\begin{center}
-    \heiti \zihao{3} 使用授权书
-\end{center}
-\vspace{12pt}
-{\songti \zihao{-4}
-本人完全了解重庆大学关于保存、使用毕业论文的有关规定，同意学校保留并向有关部门或机构送交本论文的复印件和电子版，允许论文被查阅和借阅。本人授权重庆大学可以将本论文的全部或部分内容编入有关数据库进行检索，也可以采用影印、缩印或扫描等复制手段保存和汇编本论文。
-
-\vspace{24pt}
-\noindent 本论文属于：\quad \underline{\hspace{2cm}} 公开 \qquad \underline{\hspace{2cm}} 保密（在\underline{\hspace{1.5cm}}年解密后适用本授权）
-
-\vspace{36pt}
-\noindent 作者签名（手签）：\underline{\hspace{5cm}} \hfill 日期：\underline{\hspace{3cm}}
-
-\vspace{24pt}
-\noindent 指导教师签名（手签）：\underline{\hspace{4.5cm}} \hfill 日期：\underline{\hspace{3cm}}
-\par}
 
 \begin{cnabstract}
 
-随着可再生能源快速发展，风力发电在现代电力系统中的占比持续提升。然而，风电功率受风速、风向及气象条件影响，具有明显的随机性和波动性，准确的超短期风电功率预测对电网的实时调度与安全运行具有重要意义。
+随着可再生能源快速发展，风力发电在现代电力系统中的占比持续提升。精确的风电场超短期发电功率预测可以保障电力系统的安全稳定运行，对风电场的经济调度和运行管理具有重要意义。
+本文基于风电场历史发电功率数据和气象数据，研究了深度学习方法在超短期功率预测中的应用。并对比不同深度学习模型在超短期功率预测中的性能。
+本文对国家电网发布的新能源功率预测数据中的六个不同地理位置和装机容量（36$\sim$200 MW）的实际风电场的实测数据进行验证。结果表明，在15分钟和30分钟预测（LF=1至LF=2）时，三种模型精度接近，$R^2$均保持在较高水平。随着预测步长增加，不同深度学习模型的误差均有所增加，在步长为2（30分钟）时，三种模型的预测精度接近，预测步长大于2时，CNN-LSTM混合模型的误差最小。
 
-本文以六个不同地理位置和装机容量（36$\sim$200 MW）的实际风电场为研究对象，利用2019—2020年的15分钟分辨率历史运行数据，对卷积神经网络（CNN）、长短期记忆网络（LSTM）和CNN-LSTM混合模型三种深度学习方法在超短期风电功率多步预测任务中的性能进行了系统研究与对比分析。
-
-在数据预处理阶段，采用插值法处理缺失值，利用四分位距（IQR）方法识别并约束异常值，对时间特征进行正余弦周期编码，并以滑动时间窗口方法构造深度学习样本；数据集按70\%、15\%、15\%的比例划分为训练集、验证集和测试集。在模型训练阶段，以均方误差（MSE）为损失函数，采用Adam优化器对三种模型进行统一训练，预测步长覆盖未来15分钟至90分钟（LF=1至LF=6）。
-
-实验结果表明：在15分钟和30分钟预测（LF=1至LF=2）时，三种模型精度接近，$R^2$均保持在较高水平；随着预测步长增加，LSTM的误差增长最快，在60分钟预测（LF=4）时均方误差（MSE）达97.74，而CNN-LSTM将MSE控制在67.85，较LSTM降低约30.6\%；在45至75分钟预测（LF=3至LF=5）范围内，CNN-LSTM综合表现更优；在90分钟预测（LF=6）时，CNN-LSTM的MAE为6.52，低于CNN的7.08，但MSE为117.73，略高于CNN的114.61，说明其在最长步长下并非所有指标都最优。在六个风电场的泛化测试中，三种模型单步预测的$R^2$均超过0.97，CNN-LSTM在中等偏长步长预测中表现更为稳定。
-
-综合来看，CNN-LSTM混合模型在中等偏长步长预测精度和跨风场泛化能力方面表现较好，具有较好的工程应用价值。
 
 \end{cnabstract}
 
@@ -69,15 +29,11 @@
 
 % 英文摘要
 \begin{enabstract}
-With the rapid growth of renewable energy, wind power accounts for an increasing share of modern power systems. However, wind power output is significantly influenced by wind speed, wind direction, and meteorological conditions, exhibiting strong randomness and volatility. Accurate ultra-short-term wind power forecasting plays a critical role in supporting real-time grid dispatching and secure system operation.
+With the rapid expansion of renewable energy, wind power has claimed an increasingly significant share of modern electricity systems. Accurate ultra-short-term power forecasting for wind farms is essential for ensuring the safe and stable operation of power grids, and carries considerable practical value for economic dispatch and operational management.
 
-This thesis conducts a systematic study on the ultra-short-term multi-step wind power forecasting performance of three deep learning methods—Convolutional Neural Network (CNN), Long Short-Term Memory network (LSTM), and the hybrid CNN-LSTM model—using historical operational data (15-minute resolution, 2019–2020) from six real wind farms with varying geographical locations and installed capacities (36–200 MW).
+This study investigates the application of deep learning methods to ultra-short-term wind power forecasting, drawing on historical generation data and meteorological data from wind farms. The predictive performance of several deep learning models is systematically compared under this forecasting task.
 
-In the data preprocessing stage, missing values are handled by linear interpolation, outliers are identified and constrained using the interquartile range (IQR) method, time features are encoded using sine-cosine periodic functions, and samples are constructed using a sliding time window approach. The dataset is split into training (70\%), validation (15\%), and test (15\%) sets. During model training, all three models are optimized with the Adam optimizer and mean squared error (MSE) as the loss function, with forecasting horizons ranging from 15 minutes to 90 minutes (LF=1 to LF=6, each step 15 minutes).
-
-Experimental results show that for the 15-minute and 30-minute forecasts (LF=1 to LF=2), the three models achieve similar accuracy with consistently high $R^2$ values. As the forecast horizon increases, LSTM's error grows most rapidly, reaching an MSE of 97.74 at the 60-minute horizon (LF=4), while CNN-LSTM limits the MSE to 67.85, a reduction of approximately 30.6\% compared to LSTM. Over the 45- to 75-minute horizons (LF=3 to LF=5), CNN-LSTM delivers the best overall performance. At the 90-minute horizon (LF=6), the CNN-LSTM model still achieves a lower MAE of 6.52 than CNN's 7.08, but its MSE of 117.73 is slightly higher than CNN's 114.61, indicating that it is not optimal on every metric at the longest horizon. In generalization tests across all six wind farms, all models achieve $R^2$ above 0.97 for single-step forecasting, and CNN-LSTM demonstrates more stable performance at medium-to-longer forecast horizons.
-
-In summary, the CNN-LSTM hybrid model shows strong practical value by providing better overall performance at medium-to-longer forecasting horizons and good cross-site generalization ability.
+Validation is conducted using measured data from six real-world wind farms with varying geographic locations and installed capacities (36–200 MW), sourced from the renewable energy power forecasting dataset published by State Grid Corporation of China. Results show that at 15-minute and 30-minute horizons (LF = 1 to LF = 2), all three models achieve comparable accuracy, with R² values consistently maintained at high levels. As the forecast horizon extends, prediction errors increase across all models. At a lead time of two steps (30 minutes), the three models perform similarly; beyond that point, the hybrid CNN-LSTM model yields the lowest error.
 \end{enabstract}
 \enkeywords{Wind Power Forecasting; Ultra-Short-Term Prediction; Convolutional Neural Network; Long Short-Term Memory; Deep Learning}
 
@@ -123,5 +79,11 @@ In summary, the CNN-LSTM hybrid model shows strong practical value by providing 
 同时，感谢我的家人一直以来给予我的理解、鼓励与支持。在论文写作和毕业阶段的学习生活中，家人的陪伴与信任始终是我坚持完成本论文的重要动力。
 
 最后，向所有关心和帮助过我的老师、同学和朋友致以诚挚谢意。
+
+% 插入原创性说明和使用授权书PDF页（目录中显示但不带页码）
+\clearpage
+\phantomsection
+\addtocontents{toc}{\protect\contentsline{section}{原创性声明和使用授权书}{}{}}
+\includepdf[pages=-]{说明和授权书页.pdf}
 
 \end{document}
